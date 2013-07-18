@@ -1,0 +1,10 @@
+{
+	"name": "gears/string",
+	"description": "A collection of basic string manipulation functions.",
+	"homepage": "https://github.com/phpgearbox/string",
+	"keywords": ["string", "manipulation"],
+	"license": "MIT",
+	"require": { "php": ">=5.3" },
+	"autoload": { "psr-0": { "Gears\\String\\": "" } },
+	"target-dir": "Gears/String"
+}
