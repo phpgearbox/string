@@ -1,4 +1,0 @@
-<?php
-
-require('Functions.php');
-
