@@ -7,8 +7,7 @@
 	"require": { "php": ">=5.3" },
 	"autoload":
 	{
-		"psr-0": { "Gears\\String\\": "" },
-		"files": ["Gears/String/Functions.php"]
-	},
-	"target-dir": "Gears/String"
+		"psr-4": { "Gears\\String\\": "" },
+		"files": ["Functions.php"]
+	}
 }
