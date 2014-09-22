@@ -119,20 +119,13 @@ Str::s('A string would go here...')->replace('would')->with('will');
 
 Credits
 --------------------------------------------------------------------------------
-Thanks to *alecgorge* for the inspiration, I have taken his methods refactored
-them slightly and added a few of my own methods, into the mix. The one notable
-feature removal was the MultiByte support. The reason I dropped this was 2 fold.
-
-1. I have never ever used it before, I come from an English Speaking country.
-Perhaps this is a little nieve of me but I put more emphasis on creating a
-light weight solution, we all hate bloatware.
-
-2. I found out Multibyte has this function overloading support. Okay perhaps
-it's not preferable but when I tested it out it worked fine for me. Again this
-could be a nieve view point...
-
-Anyway all the same thanks *alecgorge*
+Thanks to *alecgorge* for the inspiration, I have taken his methods re-factored
+them slightly and added a few of my own methods, into the mix.
 https://github.com/alecgorge/PHP-String-Class/
+
+Additionally all methods in the class ```Illuminate\Support\Str```
+provided by Laravel. Have been integrated into ```Gears\String```.
+https://github.com/laravel/framework/blob/4.2/src/Illuminate/Support/Str.php
 
 --------------------------------------------------------------------------------
 Developed by Brad Jones - brad@bjc.id.au
