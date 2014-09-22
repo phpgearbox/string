@@ -1,4 +1,4 @@
-<?php
+<?php namespace Gears;
 ////////////////////////////////////////////////////////////////////////////////
 // __________ __             ________                   __________              
 // \______   \  |__ ______  /  _____/  ____ _____ ______\______   \ _______  ___
@@ -11,9 +11,7 @@
 // -----------------------------------------------------------------------------
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace Gears\String;
-
-class Object implements \ArrayAccess
+class String implements \ArrayAccess
 {
 	/**
 	 * Property: $value
@@ -29,7 +27,7 @@ class Object implements \ArrayAccess
 	 * 
 	 * Parameters:
 	 * -------------------------------------------------------------------------
-	 * $string - A PHP string to tunr into a Gears\String\Object
+	 * $string - A PHP string to turn into a Gears\String object.
 	 * 
 	 * Returns:
 	 * -------------------------------------------------------------------------
@@ -39,11 +37,32 @@ class Object implements \ArrayAccess
 	{
 		$this->value = (string)$string;
 	}
+
+	/**
+	 * Method: s
+	 * =========================================================================
+	 * This provides a static constructor or factory method.
+	 * So you can do things like this:
+	 * 
+	 *     Gears\String::s('hello world')->contains('world');
+	 * 
+	 * Parameters:
+	 * -------------------------------------------------------------------------
+	 * $string - A PHP string to turn into a Gears\String object.
+	 * 
+	 * Returns:
+	 * -------------------------------------------------------------------------
+	 * void
+	 */
+	public static function s($string)
+	{
+		return new self($string);
+	}
 	
 	/**
 	 * Method: __toString
 	 * =========================================================================
-	 * Magic method to turn Gears\String\Object back into a normal string.
+	 * Magic method to turn Gears\String back into a normal string.
 	 * 
 	 * Parameters:
 	 * -------------------------------------------------------------------------
@@ -97,7 +116,7 @@ class Object implements \ArrayAccess
 	 */
 	public function offsetGet($index)
 	{
-		return CharAt($this->value, $index);
+		return \Gears\String\charAt($this->value, $index);
 	}
 	
 	/**
@@ -123,11 +142,16 @@ class Object implements \ArrayAccess
 		}
 		else
 		{
-			$start = SubString($this->value, 0, $index);
+			$start = \Gears\String\subString($this->value, 0, $index);
 		}
 		
 		// Work out the end of the string
-		$end = SubString($this->value, $index+1, Length($this->value));
+		$end = \Gears\String\subString
+		(
+			$this->value,
+			$index+1,
+			\Gears\String\length($this->value)
+		);
 		
 		// Recombine them with a new middle
 		$this->value = $start.$val.$end;
@@ -149,217 +173,136 @@ class Object implements \ArrayAccess
 	public function offsetUnset($index)
 	{
 		$this->value =
-			substr($this->value, 0, $index).
-			substr($this->value, $index+1)
+			\Gears\String\subString($this->value, 0, $index).
+			\Gears\String\subString($this->value, $index+1)
 		;
 	}
 	
 	/**
-	 * Method: convertArray
+	 * Method: convertToSelf
 	 * =========================================================================
-	 * This method will take an array of normal PHP strings
-	 * and return an array of \Gears\String\Object strings.
+	 * The idea behind this is to provide a fluent interface.
+	 * So that multiple calls can be chained together.
 	 * 
 	 * Parameters:
 	 * -------------------------------------------------------------------------
-	 * $array - The array to convert
+	 * $input - The input data. This will either be a string,
+	 * an array of strings or possibly some other value like a boolean,
+	 * in the case something failed.
 	 * 
 	 * Returns:
 	 * -------------------------------------------------------------------------
-	 * void
+	 * mixed
 	 */
-	private function convertArray($array)
+	private function convertToSelf($input)
 	{
-		// Make sure it's an array
-		if (is_array($array))
+		if (is_string($input))
 		{
-			// This is what we will return
-			$new_array = [];
+			// It's just a single string so create a new instance.
+			$output = new self($input);
+		}
+		elseif (is_array($input))
+		{
+			// Create our output array
+			$output = [];
 			
-			// Loop through the old array
-			foreach ($array as $string)
+			// Loop over the input array
+			foreach ($input as $string)
 			{
-				$new_array[] = new self($string);
+				if (is_string($string))
+				{
+					// Add a new string
+					$output[] = new self($string);
+				}
+				elseif (is_array($string))
+				{
+					// Recurse into the array
+					$output[] = $this->convertToSelf($string);
+				}
+				else
+				{
+					// We don't know what it is do do nothing to it
+					$output[] = $string;
+				}
 			}
-			
-			// Return the new array
-			return $new_array;
 		}
 		else
 		{
-			// Do nothing to it
-			return $array;
+			// We don't know what it is do do nothing to it
+			$output = $input;
 		}
+
+		return $output;
 	}
 	
-	public function Contains($needle)
+	/**
+	 * Method: __call
+	 * =========================================================================
+	 * This is what calls the underlying name spaced functions.
+	 * This class is just a fancy container and has no real
+	 * functionality at all.
+	 * 
+	 * Parameters:
+	 * -------------------------------------------------------------------------
+	 * $name - The name of the \Gears\String\"FUNCTION" to call.
+	 * $arguments - The arguments to pass to the function.
+	 * 
+	 * Returns:
+	 * -------------------------------------------------------------------------
+	 * mixed
+	 */
+	public function __call($name, $arguments)
 	{
-		return \Gears\String\Contains($this->value, $needle);
-	}
-	
-	public function Search($needle, $regx = false)
-	{
-		return new self
-		(
-			\Gears\String\Search($this->value, $needle, $regx)
-		);
-	}
-	
-	public function Replace($needle, $replace, $regex = false)
-	{
-		return new self
-		(
-			\Gears\String\Replace($this->value, $needle, $replace, $regex)
-		);
-	}
-	
-	public function Match($regex)
-	{
-		return $this->convertArray
-		(
-			\Gears\String\Match($this->value, $regex)
-		);
-	}
-	
-	public function Between($start, $end, $include = false)
-	{
-		return new self
-		(
-			\Gears\String\Between($this->value, $start, $end, $include)
-		);
-	}
-	
-	public function BetweenRegx($start, $end)
-	{
-		return $this->convertArray
-		(
-			\Gears\String\BetweenRegx($this->value, $start, $end)
-		);
-	}
-	
-	public function StartsWith($needle)
-	{
-		return \Gears\String\StartsWith($this->value, $needle);
-	}
-	
-	public function EndsWith($needle)
-	{
-		return \Gears\String\EndsWith($this->value, $needle);
-	}
-	
-	public function SubStr($start, $length)
-	{
-		return new self
-		(
-			substr($this->value, $start, $length)
-		);
-	}
-	
-	public function SubString($start, $end)
-	{
-		return new self
-		(
-			\Gears\String\SubString($this->value, $start, $end)
-		);
-	}
-	
-	public function Slice($start, $end = null)
-	{
-		return new self
-		(
-			\Gears\String\Slice($this->value, $start, $end)
-		);
-	}
-	
-	public function ConCat()
-	{
-		return new self
-		(
-			call_user_func_array
-			(
-				'\Gears\String\ConCat',
-				array_merge([$this->value], func_get_args())
-			)
-		);
-	}
-	
-	public function CharAt($point)
-	{
-		return new self
-		(
-			\Gears\String\CharAt($this->value, $point)
-		);
-	}
-	
-	public function CharCodeAt($point)
-	{
-		return new self
-		(
-			\Gears\String\CharCodeAt($this->value, $point)
-		);
-	}
-	
-	public function IndexOf($needle, $offset = 0)
-	{
-		return new self
-		(
-			\Gears\String\IndexOf($this->value, $needle, $offset)
-		);
-	}
-	
-	public function LastIndexOf($needle, $offset = 0)
-	{
-		return new self
-		(
-			\Gears\String\LastIndexOf($this->value, $needle, $offset)
-		);
-	}
-	
-	public function ToLowerCase()
-	{
-		return new self
-		(
-			\Gears\String\ToLowerCase($this->value)
-		);
-	}
-	
-	public function ToUpperCase()
-	{
-		return new self
-		(
-			\Gears\String\ToUpperCase($this->value)
-		);
-	}
-	
-	public function Split($at = '')
-	{
-		return $this->convertArray
-		(
-			\Gears\String\Split($this->value, $at)
-		);
-	}
-	
-	public function Trim($charlist = null)
-	{
-		return new self
-		(
-			trim($this->value, $charlist)
-		);
+		// Create the function name
+		$func_name = '\Gears\String\\'.$name;
+
+		// Does the function exist
+		if (!function_exists($func_name))
+		{
+			// Bail out, we don't have a function to run
+			throw new \Exception('Gears String function does not exist!');
+		}
+
+		// Prepend the current string value to the arguments
+		array_unshift($arguments, $this->value);
+
+		// Call the function
+		$result = call_user_func_array($func_name, $arguments);
+
+		// Return our selves.
+		return $this->convertToSelf($result);
 	}
 
-	public function Ltrim($charlist = null)
+	/**
+	 * Method: __callStatic
+	 * =========================================================================
+	 * This provides a static API. As of PHP 5.5 we can't import functions from
+	 * different name spaces. In PHP 5.6 we can. So this is the next best thing.
+	 * 
+	 * For example compare this:
+	 * 
+	 *     \Gears\String\contains('hello world', 'world');
+	 * 
+	 * To this:
+	 * 
+	 *     use Gears\String as Str;
+	 *     Str::contains('hello world', 'world');
+	 * 
+	 * Parameters:
+	 * -------------------------------------------------------------------------
+	 * $name - The name of the \Gears\String\"FUNCTION" to call.
+	 * $arguments - The arguments to pass to the function.
+	 * 
+	 * Returns:
+	 * -------------------------------------------------------------------------
+	 * mixed
+	 */
+	public static function __callStatic($name, $arguments)
 	{
-		return new self
-		(
-			ltrim($this->value, $charlist)
-		);
-	}
+		// Create the new instance
+		$instance = new self(array_shift($arguments));
 
-	public function Rtrim($charlist = null)
-	{
-		return new self
-		(
-			rtrim($this->value, $charlist)
-		);
+		// Run the call
+		return call_user_func_array([$instance, $name], $arguments);
 	}
 }

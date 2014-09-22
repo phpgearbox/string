@@ -1,4 +1,4 @@
-<?php
+<?php namespace Gears\String;
 ////////////////////////////////////////////////////////////////////////////////
 // __________ __             ________                   __________              
 // \______   \  |__ ______  /  _____/  ____ _____ ______\______   \ _______  ___
@@ -11,29 +11,8 @@
 // -----------------------------------------------------------------------------
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace Gears\String;
-
 /**
- * Function: Contains
- * =============================================================================
- * This does a simple check to see if the haystack contains the needle.
- * 
- * Parameters:
- * -----------------------------------------------------------------------------
- * $haystack - The string haystack to perform the test to.
- * $needle - This is what we are looking for inside the haystack.
- * 
- * Returns:
- * -----------------------------------------------------------------------------
- * boolean
- */
-function Contains($haystack, $needle)
-{
-	return (strpos($haystack, $needle) !== false);
-}
-
-/**
- * Function: Search
+ * Function: search
  * =============================================================================
  * The search() method searches a string for a specified value,
  * or regular expression, and returns the position of the match.
@@ -49,7 +28,7 @@ function Contains($haystack, $needle)
  * -----------------------------------------------------------------------------
  * boolean
  */
-function Search($haystack, $needle, $regx = false)
+function search($haystack, $needle, $regx = false)
 {
 	if ($regx)
 	{
@@ -76,7 +55,7 @@ function Search($haystack, $needle, $regx = false)
 }
 
 /**
- * Function: Replace
+ * Function: replace
  * =============================================================================
  * The replace() method searches a string for a specified value,
  * or a regular expression, and returns a new string where the specified
@@ -99,7 +78,7 @@ function Search($haystack, $needle, $regx = false)
  * -----------------------------------------------------------------------------
  * string
  */
-function Replace($haystack, $needle, $replace, $regex = false)
+function replace($haystack, $needle, $replace, $regex = false)
 {
 	if($regex)
 	{
@@ -121,7 +100,7 @@ function Replace($haystack, $needle, $replace, $regex = false)
 }
 
 /**
- * Function: Match
+ * Function: match
  * =============================================================================
  * The match() method searches a string for a match against a regular
  * expression, and returns the matches, as an Array object.
@@ -129,20 +108,20 @@ function Replace($haystack, $needle, $replace, $regex = false)
  * Parameters:
  * -----------------------------------------------------------------------------
  * $haystack - The string haystack to perform the test to.
- * $regex - Set to true if needle is a regular expression.
+ * $regex - The regular expression.
  * 
  * Returns:
  * -----------------------------------------------------------------------------
  * array
  */
-function Match($haystack, $regex)
+function match($haystack, $regex)
 {
 	preg_match_all($regex, $haystack, $matches);
 	return $matches[0];
 }
 
 /**
- * Function: Between
+ * Function: between
  * =============================================================================
  * A very simple function that will extract the information between a start and
  * an end string. This function only acts once on the given string. I find it
@@ -160,7 +139,7 @@ function Match($haystack, $regex)
  * -----------------------------------------------------------------------------
  * The string between a start and end string.
  */
-function Between($haystack, $start, $end, $include = false)
+function between($haystack, $start, $end, $include = false)
 {
 	// This is what we will return
 	$result = '';
@@ -198,11 +177,11 @@ function Between($haystack, $start, $end, $include = false)
 }
 
 /**
- * Function: BetweenRegx
+ * Function: betweenRegx
  * =============================================================================
  * This does more or less the same thing as above except that it does it using
  * a regular expression. It also matches multiple start and end strings.
- * This function is great or parsing HTML/XML type data.
+ * This function is great for parsing HTML/XML type data.
  * 
  * Parameters:
  * -----------------------------------------------------------------------------
@@ -217,7 +196,7 @@ function Between($haystack, $start, $end, $include = false)
  * strings. The second key contains an array of results that don't have the
  * start and end strings.
  */
-function BetweenRegx($haystack, $start, $end)
+function betweenRegx($haystack, $start, $end)
 {
 	// Create the regular expression
 	$find = '/'.preg_quote($start, '/').'(.*?)'.preg_quote($end, '/').'/s';
@@ -234,79 +213,7 @@ function BetweenRegx($haystack, $start, $end)
 }
 
 /**
- * Function: StartsWith
- * =============================================================================
- * This checks to see if the haystack starts with the needle.
- * 
- * Parameters:
- * -----------------------------------------------------------------------------
- * $haystack - The string haystack to perform the test to.
- * $needle - This is what the haystack should start with.
- * 
- * Returns:
- * -----------------------------------------------------------------------------
- * boolean
- */
-function StartsWith($haystack, $needle)
-{
-	// Get the length of the needle
-	$needle_len = strlen($needle);
-	
-	// Get the length of the haystack
-	$haystack_len = strlen($haystack);
-	
-	// Get the start section
-	$start = substr($haystack, 0, $needle_len);
-	
-	// Do we have a match
-	if ($needle_len <= $haystack_len && $start === $needle)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-/**
- * Function: EndsWith
- * =============================================================================
- * This checks to see if the haystack ends with the needle.
- * 
- * Parameters:
- * -----------------------------------------------------------------------------
- * $haystack - The string haystack to perform the test to.
- * $needle - This is what the haystack should end with.
- * 
- * Returns:
- * -----------------------------------------------------------------------------
- * boolean
- */
-function EndsWith($haystack, $needle)
-{
-	// Get the length of the needle
-	$needle_len = strlen($needle);
-	
-	// Get the length of the haystack
-	$haystack_len = strlen($haystack);
-	
-	// Get the end section
-	$end = substr($haystack, -$needle_len);
-	
-	// Do we have a match
-	if ($needle_len <= $haystack_len && $end === $needle)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-/**
- * Function: SubString
+ * Function: subString
  * =============================================================================
  * The substring() method extracts the characters from a string, between two
  * specified indices, and returns the new sub string. This method extracts the
@@ -322,7 +229,7 @@ function EndsWith($haystack, $needle)
  * -----------------------------------------------------------------------------
  * string
  */
-function SubString($string, $start, $end = null)
+function subString($string, $start, $end = null)
 {
 	if(empty($end))
 	{
@@ -335,7 +242,7 @@ function SubString($string, $start, $end = null)
 }
 
 /**
- * Function: Slice
+ * Function: slice
  * =============================================================================
  * This is really just an alias for substring for completeness sake
  * 
@@ -349,13 +256,13 @@ function SubString($string, $start, $end = null)
  * -----------------------------------------------------------------------------
  * string
  */
-function Slice($string, $start, $end = null)
+function slice($string, $start, $end = null)
 {
-	return SubString($string, $start, $end);
+	return subString($string, $start, $end);
 }
 
 /**
- * Function: ConCat
+ * Function: conCat
  * =============================================================================
  * The concat() method is used to join two or more strings. This method does
  * not change the existing strings, but returns a new string containing the
@@ -372,7 +279,7 @@ function Slice($string, $start, $end = null)
  * -----------------------------------------------------------------------------
  * string
  */
-function ConCat()
+function conCat()
 {
 	$result = '';
 	foreach(func_get_args() as $arg) { $result .= (string)$arg; }
@@ -380,7 +287,7 @@ function ConCat()
 }
 
 /**
- * Function: Split
+ * Function: split
  * =============================================================================
  * Splits a string into an array of substrings
  * 
@@ -395,7 +302,7 @@ function ConCat()
  * -----------------------------------------------------------------------------
  * array
  */
-function Split ($string, $at = '')
+function split ($string, $at = '')
 {
 	if(empty($at))
 	{
@@ -408,25 +315,7 @@ function Split ($string, $at = '')
 }
 
 /**
- * Function: Length
- * =============================================================================
- * This will return the length of the string
- * 
- * Parameters:
- * -----------------------------------------------------------------------------
- * $string - The string
- * 
- * Returns:
- * -----------------------------------------------------------------------------
- * int
- */
-function Length($string)
-{
-	return strlen($string);
-}
-
-/**
- * Function: Range
+ * Function: range
  * =============================================================================
  * This checks to see if the length of the haystack is between x and y
  * Calulates inclusive of x and y, I felt this was the natural assumption.
@@ -443,7 +332,7 @@ function Length($string)
  * -----------------------------------------------------------------------------
  * boolean
  */
-function Range($string, $x, $y)
+function range($string, $x, $y)
 {
 	// Get the length of the string
 	$length = strlen($string);
@@ -460,7 +349,7 @@ function Range($string, $x, $y)
 }
 
 /**
- * Function: CharAt
+ * Function: charAt
  * =============================================================================
  * The charAt() method returns the character at the specified index in a string.
  * The index of the first character is 0, the second character is 1, and so on.
@@ -474,13 +363,13 @@ function Range($string, $x, $y)
  * -----------------------------------------------------------------------------
  * string
  */
-function CharAt($string, $point)
+function charAt($string, $point)
 {
 	return substr($string, $point, 1);
 }
 
 /**
- * Function: CharCodeAt
+ * Function: charCodeAt
  * =============================================================================
  * The charCodeAt() method returns the Unicode of the character at the
  * specified index in a string. The index of the first character is 0,
@@ -495,13 +384,13 @@ function CharAt($string, $point)
  * -----------------------------------------------------------------------------
  * int
  */
-function CharCodeAt($string, $point)
+function charCodeAt($string, $point)
 {
 	return ord(substr($string, $point, 1));
 }
 
 /**
- * Function: FromCharCode
+ * Function: fromCharCode
  * =============================================================================
  * The fromCharCode() method converts Unicode values into characters.
  * 
@@ -513,13 +402,13 @@ function CharCodeAt($string, $point)
  * -----------------------------------------------------------------------------
  * string
  */
-function FromCharCode($code)
+function fromCharCode($code)
 {
 	return chr($code);
 }
 
 /**
- * Function: IndexOf
+ * Function: indexOf
  * =============================================================================
  * Just an alias for strpos
  * 
@@ -533,13 +422,13 @@ function FromCharCode($code)
  * -----------------------------------------------------------------------------
  * int
  */
-function IndexOf($haystack, $needle, $offset = 0)
+function indexOf($haystack, $needle, $offset = 0)
 {
 	return strpos($haystack, $needle, $offset);
 }
 
 /**
- * Function: LastIndexOf
+ * Function: lastIndexOf
  * =============================================================================
  * Just an alias for strrpos
  * 
@@ -553,87 +442,47 @@ function IndexOf($haystack, $needle, $offset = 0)
  * -----------------------------------------------------------------------------
  * int
  */
-function LastIndexOf($haystack, $needle, $offset = 0)
+function lastIndexOf($haystack, $needle, $offset = 0)
 {
 	return strrpos($haystack, $needle, $offset);
 }
 
 /**
- * Function: ToLowerCase
+ * Section: Laravel Stubs
  * =============================================================================
- * Just an alias for strtolower
+ * The following functions are just stubs for methods of the class:
  * 
- * Parameters:
- * -----------------------------------------------------------------------------
- * $string
+ *     \Illuminate\Support\Str
  * 
- * Returns:
- * -----------------------------------------------------------------------------
- * string
+ * I could integrate these calls directly and dynamically into the
+ * Gears\String class. However then this procedural API would not match
+ * that of the Gears\String class.
+ * 
+ * Each function does not define any arguments, we dynamically pick these up
+ * so that any changes to the methods definition in the original Laravel class
+ * are automatically picked up here.
+ * 
+ * Thus if you are looking for documenation on how to use these functions.
+ * Please see: http://laravel.com/api/4.2/Illuminate/Support/Str.html
  */
-function ToLowerCase($string)
-{
-	return strtolower($string);
-}
 
-/**
- * Function: ToUpperCase
- * =============================================================================
- * Just an alias for strtoupper
- * 
- * Parameters:
- * -----------------------------------------------------------------------------
- * $string
- * 
- * Returns:
- * -----------------------------------------------------------------------------
- * string
- */
-function ToUpperCase ($string)
-{
-	return strtoupper($string);
-}
-
-/**
- * Function: GenRand
- * =============================================================================
- * This will generate a random string. This is certianly nothing to special.
- * If you are looking for something to use with security and encryption I
- * would look else where. But is handy for creating new random passwords,
- * api tokens, session ids, etc.
- * 
- * Parameters:
- * -----------------------------------------------------------------------------
- * $length - How long do we want the random string to be?
- * $possible - A string of possible characters to use in the random string.
- * 
- * Returns:
- * -----------------------------------------------------------------------------
- * A random string
- */
-function GenRand($length, $possible = "0123456789bcdfghjkmnpqrstvwxyz")
-{
-	// This is what we will return
-	$string = '';
-	
-	// Start looping until we have created a string of the desired length
-	$i = 0; 
-	while ($i < $length)
-	{
-		// Select a character
-		$char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
-		
-		// Make sure that character does not already exist
-		if (!strstr($string, $char))
-		{
-			// Add it to our new string
-			$string .= $char;
-			
-			// Increase the loop count
-			$i++;
-		}
-	}
-	
-	// Return the string
-	return $string;
-}
+function ascii() { return call_user_func_array('\Illuminate\Support\Str::ascii', func_get_args()); }
+function camel() { return call_user_func_array('\Illuminate\Support\Str::camel', func_get_args()); }
+function contains() { return call_user_func_array('\Illuminate\Support\Str::contains', func_get_args()); }
+function startsWith() { return call_user_func_array('\Illuminate\Support\Str::startsWith', func_get_args()); }
+function endsWith() { return call_user_func_array('\Illuminate\Support\Str::endsWith', func_get_args()); }
+function finish() { return call_user_func_array('\Illuminate\Support\Str::finish', func_get_args()); }
+function is() { return call_user_func_array('\Illuminate\Support\Str::is', func_get_args()); }
+function length() { return call_user_func_array('\Illuminate\Support\Str::length', func_get_args()); }
+function limit() { return call_user_func_array('\Illuminate\Support\Str::limit', func_get_args()); }
+function lower() { return call_user_func_array('\Illuminate\Support\Str::lower', func_get_args()); }
+function upper() { return call_user_func_array('\Illuminate\Support\Str::upper', func_get_args()); }
+function words() { return call_user_func_array('\Illuminate\Support\Str::words', func_get_args()); }
+function plural() { return call_user_func_array('\Illuminate\Support\Str::plural', func_get_args()); }
+function random() { return call_user_func_array('\Illuminate\Support\Str::random', func_get_args()); }
+function quickRandom() { return call_user_func_array('\Illuminate\Support\Str::quickRandom', func_get_args()); }
+function title() { return call_user_func_array('\Illuminate\Support\Str::title', func_get_args()); }
+function singular() { return call_user_func_array('\Illuminate\Support\Str::singular', func_get_args()); }
+function slug() { return call_user_func_array('\Illuminate\Support\Str::slug', func_get_args()); }
+function snake() { return call_user_func_array('\Illuminate\Support\Str::snake', func_get_args()); }
+function studly() { return call_user_func_array('\Illuminate\Support\Str::studly', func_get_args()); }
