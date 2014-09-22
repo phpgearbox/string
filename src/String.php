@@ -23,7 +23,7 @@ class String implements \ArrayAccess
 	/**
 	 * Method: __construct
 	 * =========================================================================
-	 * Creates a new Gears\String\Object
+	 * Creates a new Gears\String object.
 	 * 
 	 * Parameters:
 	 * -------------------------------------------------------------------------
@@ -142,11 +142,11 @@ class String implements \ArrayAccess
 		}
 		else
 		{
-			$start = \Gears\String\subString($this->value, 0, $index);
+			$start = \Gears\String\slice($this->value, 0, $index);
 		}
 		
 		// Work out the end of the string
-		$end = \Gears\String\subString
+		$end = \Gears\String\slice
 		(
 			$this->value,
 			$index+1,
@@ -173,8 +173,8 @@ class String implements \ArrayAccess
 	public function offsetUnset($index)
 	{
 		$this->value =
-			\Gears\String\subString($this->value, 0, $index).
-			\Gears\String\subString($this->value, $index+1)
+			\Gears\String\slice($this->value, 0, $index).
+			\Gears\String\slice($this->value, $index+1)
 		;
 	}
 	

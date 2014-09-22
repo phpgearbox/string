@@ -1,7 +1,15 @@
 The String Gear
 ================================================================================
+[![Build Status](https://travis-ci.org/phpgearbox/string.svg?branch=master)](https://travis-ci.org/phpgearbox/string)
+[![Latest Stable Version](https://poser.pugx.org/gears/string/v/stable.svg)](https://packagist.org/packages/gears/string)
+[![Total Downloads](https://poser.pugx.org/gears/string/downloads.svg)](https://packagist.org/packages/gears/string)
+[![License](https://poser.pugx.org/gears/string/license.svg)](https://packagist.org/packages/gears/string)
+
 A collection of basic string manipulation functions.
-There are 2 APIs, one procedural based and one object based.
+There are 2 APIs:
+
+  - One procedural based using name spaced functions.
+  - And an object based API.
 
 I am not going to bother documenting every single last function here but please
 see below for some general usage examples. The rest you can work out for
@@ -19,60 +27,95 @@ Here are a few procedural examples:
 
 ```php
 // returns true
-Gears\String\Contains('this is a test', 'test');
+Gears\String\contains('this is a test', 'test');
 
 // returns 'this is a test'
-Gears\String\Between('<p>this is a test</p>', '<p>', '</p>');
+Gears\String\between('<p>this is a test</p>', '<p>', '</p>');
 
 // returns 'cde'
-Gears\String\SubString('abcdeg', 2, 5);
+Gears\String\subString('abcdeg', 2, 5);
 ```
 
-And here are the same examples but using the Gears\String\Object class:
+In PHP 5.6 you can import functions so you could change the above to:
 
 ```php
-// $new_string = true
-$string = new Gears\String\Object('this is a test');
-$new_string = $string->Contains('test');
+// Import the functions
+use function Gears\String\contains;
+use function Gears\String\between;
+use function Gears\String\subString;
 
-// $new_string = 'this is a test'
-$string = new Gears\String\Object('<p>this is a test</p>');
-$new_string = $string->Between('<p>', '</p>');
+// returns true
+contains('this is a test', 'test');
 
-// $new_string = 'cde'
-$string = new Gears\String\Object('abcdeg');
-$new_string = $string->SubString(2, 5);
+// returns 'this is a test'
+between('<p>this is a test</p>', '<p>', '</p>');
+
+// returns 'cde'
+subString('abcdeg', 2, 5);
 ```
 
-Where ever a new string is returned it is in fact a new instance of the Object
-class, thus you can also do things like this with the Object API:
+> NOTE: All function names are camelCased.
+
+Prior to PHP 5.6 this is not possible. So you can do this instead:
 
 ```php
-// $new_string = 'this is a test'
-$string = new Gears\String\Object('<div><p>this is a test</p></div>');
-$new_string = $string->Between('<div>', '</div>')->Between('<p>', '</p>');
+// Import the string class
+use Gears\String as Str;
+
+// returns true
+Str::contains('this is a test', 'test');
+
+// returns 'this is a test'
+Str::between('<p>this is a test</p>', '<p>', '</p>');
+
+// returns 'cde'
+Str::subString('abcdeg', 2, 5);
 ```
 
-If an array is returned for example when using the Match method, the array
-will be an array of Gears\String\Object instances not simple PHP strings.
+**The factory method:** You may wish to use the factory method to intiate a
+new Gears\String object. When you do, please note how the subsequent method
+call signature changes. You no longer need to provide the string to be performed
+on as the first argument. This is automatically done for you.
+Here is an example:
+
+```php
+// using the factory method - returns true
+Str::s('This is a test')->contains('test');
+
+// Method chaining is possible - returns 'this is a test'
+Str::s('<div><p>this is a test</p></div>')->between('<div>', '</div>')->between('<p>', '</p>');
+```
+
+If an array is returned for example when using the match method, the array
+will be an array of Gears\String instances not simple PHP strings.
 
 ```php
 // $results would look like:
-// Array( Gears\String\Object(I), Gears\String\Object(a) )
-$string = new Gears\String\Object('I am going to perform a test');
-$results = $string->Match('/ \w /');
+// Array( Gears\String(I), Gears\String(a) )
+$string = new Gears\String('I am going to perform a test');
+$results = $string->match('/ \w /');
 
 // So I can do this:
 foreach ($results as $result)
 {
-	if ($result->Contains('a'))
+	if ($result->contains('a'))
 	{
 		echo 'we found the letter a';
 	}
 }
 ```
 
-> NOTE: That the procedural API will only ever return standard PHP strings.
+> NOTE: Using the namespaced functions directly will only ever return
+standard PHP strings unlike the above.
+
+The Roadmap
+--------------------------------------------------------------------------------
+My ultimate goal is to provide a fluent human like interface.
+For example, a replace call might look like this:
+
+```php
+Str::s('A string would go here...')->replace('would')->with('will');
+```
 
 Credits
 --------------------------------------------------------------------------------

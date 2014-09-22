@@ -149,22 +149,27 @@ function between($haystack, $start, $end, $include = false)
 	
 	// Can we find the start?
 	$ini = strpos($haystack, $start);
-	if ($ini == 0)
+	if ($ini === false)
 	{
 		// Nope so return nothing
-		$result = '';
+		return '';
 	}
-	else
+
+	// Can we find the end?
+	if (strpos($haystack, $end) === false)
 	{
-		// Move our position past the start point
-		$ini += strlen($start);
-		
-		// Get the length of the middle section
-		$len = strpos($haystack, $end, $ini) - $ini;
-		
-		// Grab the middle
-		$result = substr($haystack, $ini, $len);
+		// Nope so return nothing
+		return '';
 	}
+
+	// Move our position past the start point
+	$ini += strlen($start);
+	
+	// Get the length of the middle section
+	$len = strpos($haystack, $end, $ini) - $ini;
+	
+	// Grab the middle
+	$result = substr($haystack, $ini, $len);
 	
 	// Do we want the start and end?
 	if ($include)
@@ -335,7 +340,7 @@ function split ($string, $at = '')
 function range($string, $x, $y)
 {
 	// Get the length of the string
-	$length = strlen($string);
+	$length = length($string);
 	
 	// Is it between x and y
 	if (($length >= $x) && ($length <= $y))
