@@ -11,8 +11,20 @@
 // -----------------------------------------------------------------------------
 ////////////////////////////////////////////////////////////////////////////////
 
+use \Illuminate\Support\Traits\MacroableTrait;
+
 class String implements \ArrayAccess
 {
+	/*
+	 * Make this compatiable with the Laravel Str class.
+	 * That way we can easily swap in our version into a Laravel alias list.
+	 */
+	use MacroableTrait
+	{
+		__callStatic as __macroCallStatic;
+		__call as __macroCall;
+	}
+
 	/**
 	 * Property: $value
 	 * =========================================================================
@@ -238,9 +250,8 @@ class String implements \ArrayAccess
 	/**
 	 * Method: __call
 	 * =========================================================================
-	 * This is what calls the underlying name spaced functions.
-	 * This class is just a fancy container and has no real
-	 * functionality at all.
+	 * This is what creates the fluent api. This class is just a fancy
+	 * container and has no real functionality at all.
 	 * 
 	 * Parameters:
 	 * -------------------------------------------------------------------------
@@ -259,6 +270,12 @@ class String implements \ArrayAccess
 		// Does the function exist
 		if (!function_exists($func_name))
 		{
+			// Try a macro
+			if (self::hasMacro($name))
+			{
+				return self::__macroCall($name, $arguments);
+			}
+
 			// Bail out, we don't have a function to run
 			throw new \Exception('Gears String function does not exist!');
 		}
@@ -288,6 +305,9 @@ class String implements \ArrayAccess
 	 *     use Gears\String as Str;
 	 *     Str::contains('hello world', 'world');
 	 * 
+	 * NOTE: Static calls like this will return the exact output from the
+	 * underlying function. So you can't do method chaining, etc.
+	 * 
 	 * Parameters:
 	 * -------------------------------------------------------------------------
 	 * $name - The name of the \Gears\String\"FUNCTION" to call.
@@ -299,10 +319,23 @@ class String implements \ArrayAccess
 	 */
 	public static function __callStatic($name, $arguments)
 	{
-		// Create the new instance
-		$instance = new self(array_shift($arguments));
+		// Create the function name
+		$func_name = '\Gears\String\\'.$name;
 
-		// Run the call
-		return call_user_func_array([$instance, $name], $arguments);
+		// Does the function exist
+		if (!function_exists($func_name))
+		{
+			// Try a macro
+			if (self::hasMacro($name))
+			{
+				return self::__macroCallStatic($name, $arguments);
+			}
+
+			// Bail out, we don't have a function to run
+			throw new \Exception('Gears String function does not exist!');
+		}
+
+		// Call the function
+		return call_user_func_array($func_name, $arguments);
 	}
 }

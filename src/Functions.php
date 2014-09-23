@@ -121,6 +121,27 @@ function match($haystack, $regex)
 }
 
 /**
+ * Function: matches
+ * =============================================================================
+ * This function is an alias for the laravel Str::is() method.
+ * The reason we have this is because the laravel method has the haystack and
+ * pattern parameters around the wrong way. And hence our fluent API fails.
+ * 
+ * Parameters:
+ * -----------------------------------------------------------------------------
+ * $haystack - The string haystack to perform the test to.
+ * $pattern - A simple string which uses "*" the wildcard character.
+ * 
+ * Returns:
+ * -----------------------------------------------------------------------------
+ * boolean
+ */
+function matches($haystack, $pattern)
+{
+	return is($pattern, $haystack);
+}
+
+/**
  * Function: between
  * =============================================================================
  * A very simple function that will extract the information between a start and
@@ -453,6 +474,166 @@ function lastIndexOf($haystack, $needle, $offset = 0)
 }
 
 /**
+ * Function: humanise
+ * =============================================================================
+ * This does the reverse of camel case, snake case, etc.
+ * 
+ * For example:
+ * 
+ *     fooBar  => Foo Bar
+ *     foo-bar => Foo Bar
+ *     foo_bar => Foo Bar
+ * 
+ * Parameters:
+ * -----------------------------------------------------------------------------
+ * $string - The string to humanise.
+ * 
+ * Returns:
+ * -----------------------------------------------------------------------------
+ * string
+ */
+function humanise($string)
+{
+	return ucwords(str_replace(['_', '-'], ' ', snake($string)));
+}
+
+/**
+ * Function: to
+ * =============================================================================
+ * This function has been built with the fluent API in mind.
+ * Although can still be used procedurally.
+ * 
+ * Parameters:
+ * -----------------------------------------------------------------------------
+ * $string - The string to change form, ie: lower case to upper case.
+ * 
+ * $what - What do we want to change the string into.
+ * Current valid values for this:
+ * 
+ *     - upper | uppercase | big
+ *     - lower | lowercase | small
+ *     - singular | one | 1
+ *     - plural | many | lots
+ *     - camel | camelcase
+ *     - slug | slugcase
+ *     - title | titlecase
+ *     - snake | snakecase
+ *     - studly | studlycase
+ *     - human | humanise | humanize
+ * 
+ * Returns:
+ * -----------------------------------------------------------------------------
+ * string
+ */
+function to($string, $what)
+{
+	$what = lower($what);
+
+	switch ($what)
+	{
+		case 'upper':
+		case 'uppercase':
+		case 'big':
+		{
+			return upper($string);
+			break;
+		}
+
+		case 'lower':
+		case 'lowercase':
+		case 'small':
+		{
+			return lower($string);
+			break;
+		}
+
+		case 'singular':
+		case 'one':
+		case '1':
+		case 1:
+		{
+			return singular($string);
+			break;
+		}
+
+		case 'plural':
+		case 'many':
+		case 'lots':
+		{
+			return plural($string);
+			break;
+		}
+
+		case 'camel':
+		case 'camelcase':
+		{
+			return camel($string);
+			break;
+		}
+
+		case 'slug':
+		case 'slugcase':
+		{
+			return slug($string);
+			break;
+		}
+
+		case 'title':
+		case 'titlecase':
+		{
+			return title($string);
+			break;
+		}
+
+		case 'snake':
+		case 'snakecase':
+		{
+			return snake($string);
+			break;
+		}
+
+		case 'studly':
+		case 'studlycase':
+		{
+			return studly($string);
+			break;
+		}
+
+		case 'humanise':
+		case 'humanize':
+		case 'human':
+		{
+			return humanise($string);
+			break;
+		}
+
+		default:
+		{
+			return $string;
+		}
+	}
+}
+
+/**
+ * Function: make
+ * =============================================================================
+ * This is simply an alias for the "to" function above.
+ * 
+ * Parameters:
+ * -----------------------------------------------------------------------------
+ * $string - See "to" function docs.
+ * $what - See "to" function docs.
+ * 
+ * Returns:
+ * -----------------------------------------------------------------------------
+ * string
+ */
+function make($string, $what)
+{
+	return to($string, $what);
+}
+
+/**
  * Section: Laravel Stubs
  * =============================================================================
  * The following functions are just stubs for methods of the class:
@@ -491,3 +672,4 @@ function singular() { return call_user_func_array('\Illuminate\Support\Str::sing
 function slug() { return call_user_func_array('\Illuminate\Support\Str::slug', func_get_args()); }
 function snake() { return call_user_func_array('\Illuminate\Support\Str::snake', func_get_args()); }
 function studly() { return call_user_func_array('\Illuminate\Support\Str::studly', func_get_args()); }
+function parseCallback() { return call_user_func_array('\Illuminate\Support\Str::parseCallback', func_get_args()); }

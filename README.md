@@ -8,8 +8,8 @@ The String Gear
 A collection of basic string manipulation functions.
 There are 2 APIs:
 
-  - One procedural based using name spaced functions.
-  - And an object based API.
+  - One procedural based using name spaced functions / static method calls.
+  - And a more fluent object based API.
 
 I am not going to bother documenting every single last function here but please
 see below for some general usage examples. The rest you can work out for
@@ -72,7 +72,7 @@ Str::between('<p>this is a test</p>', '<p>', '</p>');
 Str::subString('abcdeg', 2, 5);
 ```
 
-**The factory method:** You may wish to use the factory method to intiate a
+**The factory method:** You may wish to use the factory method to initiate a
 new Gears\String object. When you do, please note how the subsequent method
 call signature changes. You no longer need to provide the string to be performed
 on as the first argument. This is automatically done for you.
@@ -83,38 +83,43 @@ Here is an example:
 Str::s('This is a test')->contains('test');
 
 // Method chaining is possible - returns 'this is a test'
-Str::s('<div><p>this is a test</p></div>')->between('<div>', '</div>')->between('<p>', '</p>');
+Str::s('<div><p>this is a test</p></div>')
+	->between('<div>', '</div>')
+	->between('<p>', '</p>');
 ```
 
 If an array is returned for example when using the match method, the array
 will be an array of Gears\String instances not simple PHP strings.
 
 ```php
-// $results would look like:
-// Array( Gears\String(I), Gears\String(a) )
-$string = new Gears\String('I am going to perform a test');
-$results = $string->match('/ \w /');
-
-// So I can do this:
-foreach ($results as $result)
+foreach (Str::s('I am going to perform a test')->match('/ \w /') as $match)
 {
-	if ($result->contains('a'))
+	if ($match->contains('a'))
 	{
 		echo 'we found the letter a';
 	}
 }
 ```
 
-> NOTE: Using the namespaced functions directly will only ever return
-standard PHP strings unlike the above.
+> NOTE: Using the procedural API will only ever
+> return standard PHP strings unlike the above.
 
-The Roadmap
+Laravel Integration
 --------------------------------------------------------------------------------
-My ultimate goal is to provide a fluent human like interface.
-For example, a replace call might look like this:
+*Gears\String* has been designed as functionally compatible to the *Laravel Str*
+class. Thus if you want you can completely swap out
+```Illuminate\Support\Str``` for ```Gears\String```.
+
+To do so in the file ```/app/config/app.php``` replace the following line:
 
 ```php
-Str::s('A string would go here...')->replace('would')->with('will');
+'Str' => 'Illuminate\Support\Str',
+```
+
+with:
+
+```php
+'Str' => 'Gears\String',
 ```
 
 Credits

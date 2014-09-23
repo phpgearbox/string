@@ -120,5 +120,176 @@ class StringFunctionsTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(false, Gears\String\lastIndexOf($this->string, 'foo'));
 	}
 
-	// TODO: Ideally we should probably test the remaining laravel functions.
+	public function testAscii()
+	{
+		$this->assertEquals('', Gears\String\ascii(''));
+		$this->assertEquals('deja vu', Gears\String\ascii('déjà vu'));
+		$this->assertEquals('i', Gears\String\ascii('ı'));
+
+		$l = setlocale(LC_CTYPE, '0');
+		if ('glibc' === ICONV_IMPL && 'de_DE.utf8' === setlocale(LC_CTYPE, 'de_DE.utf8', '0'))
+		{
+			$this->assertSame( 'ae', Gears\String\ascii('ä') );
+		}
+		setlocale(LC_CTYPE, $l);
+	}
+
+	public function testContains()
+	{
+		$this->assertTrue(Gears\String\contains('taylor', 'ylo'));
+		$this->assertTrue(Gears\String\contains('taylor', array('ylo')));
+		$this->assertFalse(Gears\String\contains('taylor', 'xxx'));
+		$this->assertFalse(Gears\String\contains('taylor', array('xxx')));
+		$this->assertFalse(Gears\String\contains('taylor', ''));
+	}
+
+	public function testStartsWith()
+	{
+		$this->assertTrue(Gears\String\startsWith('jason', 'jas'));
+		$this->assertTrue(Gears\String\startsWith('jason', 'jason'));
+		$this->assertTrue(Gears\String\startsWith('jason', array('jas')));
+		$this->assertFalse(Gears\String\startsWith('jason', 'day'));
+		$this->assertFalse(Gears\String\startsWith('jason', array('day')));
+		$this->assertFalse(Gears\String\startsWith('jason', ''));
+	}
+
+	public function testEndsWith()
+	{
+		$this->assertTrue(Gears\String\endsWith('jason', 'on'));
+		$this->assertTrue(Gears\String\endsWith('jason', 'jason'));
+		$this->assertTrue(Gears\String\endsWith('jason', array('on')));
+		$this->assertFalse(Gears\String\endsWith('jason', 'no'));
+		$this->assertFalse(Gears\String\endsWith('jason', array('no')));
+		$this->assertFalse(Gears\String\endsWith('jason', ''));
+		$this->assertFalse(Gears\String\endsWith('7', ' 7'));
+	}
+
+	public function testFinish()
+	{
+		$this->assertEquals('abbc', Gears\String\finish('ab', 'bc'));
+		$this->assertEquals('abbc', Gears\String\finish('abbcbc', 'bc'));
+		$this->assertEquals('abcbbc', Gears\String\finish('abcbbcbc', 'bc'));
+	}
+
+	public function testIs()
+	{
+		$this->assertTrue(Gears\String\is('/', '/'));
+		$this->assertFalse(Gears\String\is('/', ' /'));
+		$this->assertFalse(Gears\String\is('/', '/a'));
+		$this->assertTrue(Gears\String\is('foo/*', 'foo/bar/baz'));
+		$this->assertTrue(Gears\String\is('*/foo', 'blah/baz/foo'));
+	}
+
+	public function testLength()
+	{
+		$this->assertEquals(17, Gears\String\length($this->string));
+	}
+
+	public function testLimit()
+	{
+		$this->assertEquals('This...', Gears\String\limit($this->string, 4));
+	}
+
+	public function testLower()
+	{
+		$this->assertEquals('this is a string.', Gears\String\lower($this->string));
+	}
+
+	public function testUpper()
+	{
+		$this->assertEquals('THIS IS A STRING.', Gears\String\upper($this->string));
+	}
+
+	public function testWords()
+	{
+		$this->assertEquals('Taylor...', Gears\String\words('Taylor Otwell', 1));
+		$this->assertEquals('Taylor___', Gears\String\words('Taylor Otwell', 1, '___'));
+		$this->assertEquals('Taylor Otwell', Gears\String\words('Taylor Otwell', 3));
+		$this->assertEquals(' Taylor Otwell ', Gears\String\words(' Taylor Otwell ', 3));
+		$this->assertEquals(' Taylor...', Gears\String\words(' Taylor Otwell ', 1));
+		$nbsp = chr(0xC2).chr(0xA0);
+		$this->assertEquals(' ', Gears\String\words(' '));
+		$this->assertEquals($nbsp, Gears\String\words($nbsp));
+	}
+
+	public function testPlural()
+	{
+		$this->assertEquals('children', Gears\String\plural('child'));
+		$this->assertEquals('tests', Gears\String\plural('test'));
+		$this->assertEquals('deer', Gears\String\plural('deer'));
+		$this->assertEquals('Children', Gears\String\plural('Child'));
+		$this->assertEquals('CHILDREN', Gears\String\plural('CHILD'));
+		$this->assertEquals('Tests', Gears\String\plural('Test'));
+		$this->assertEquals('TESTS', Gears\String\plural('TEST'));
+		$this->assertEquals('tests', Gears\String\plural('test'));
+		$this->assertEquals('Deer', Gears\String\plural('Deer'));
+		$this->assertEquals('DEER', Gears\String\plural('DEER'));
+	}
+
+	public function testSingular()
+	{
+		$this->assertEquals('Child', Gears\String\singular('Children'));
+		$this->assertEquals('CHILD', Gears\String\singular('CHILDREN'));
+		$this->assertEquals('Test', Gears\String\singular('Tests'));
+		$this->assertEquals('TEST', Gears\String\singular('TESTS'));
+		$this->assertEquals('Deer', Gears\String\singular('Deer'));
+		$this->assertEquals('DEER', Gears\String\singular('DEER'));
+		$this->assertEquals('Criterion', Gears\String\singular('Criteria'));
+		$this->assertEquals('CRITERION', Gears\String\singular('CRITERIA'));
+		$this->assertEquals('child', Gears\String\singular('children'));
+		$this->assertEquals('test', Gears\String\singular('tests'));
+		$this->assertEquals('deer', Gears\String\singular('deer'));
+		$this->assertEquals('criterion', Gears\String\singular('criteria'));
+	}
+
+	public function testQuickRandom()
+	{
+		$randomInteger = mt_rand(1, 100);
+		$this->assertEquals($randomInteger, strlen(Gears\String\quickRandom($randomInteger)));
+		$this->assertInternalType('string', Gears\String\quickRandom());
+		$this->assertEquals(16, strlen(Gears\String\quickRandom()));
+	}
+
+	public function testRandom()
+	{
+		$this->assertEquals(16, strlen(Gears\String\random()));
+		$randomInteger = mt_rand(1, 100);
+		$this->assertEquals($randomInteger, strlen(Gears\String\random($randomInteger)));
+		$this->assertInternalType('string', Gears\String\random());
+	}
+
+	public function testTitle()
+	{
+		$this->assertEquals('Jefferson Costella', Gears\String\title('jefferson costella'));
+		$this->assertEquals('Jefferson Costella', Gears\String\title('jefFErson coSTella'));
+	}
+
+	public function testSlug()
+	{
+		$this->assertEquals('hello-world', Gears\String\slug('hello world'));
+		$this->assertEquals('hello-world', Gears\String\slug('hello-world'));
+		$this->assertEquals('hello-world', Gears\String\slug('hello_world'));
+		$this->assertEquals('hello_world', Gears\String\slug('hello_world', '_'));
+	}
+
+	public function testSnake()
+	{
+		$this->assertEquals('foo_bar', Gears\String\snake('fooBar'));
+	}
+
+	public function testCamelCase()
+	{
+		$this->assertEquals('fooBar', Gears\String\camel('FooBar'));
+		$this->assertEquals('fooBar', Gears\String\camel('foo_bar'));
+		$this->assertEquals('fooBarBaz', Gears\String\camel('Foo-barBaz'));
+		$this->assertEquals('fooBarBaz', Gears\String\camel('foo-bar_baz'));
+	}
+
+	public function testStudly()
+	{
+		$this->assertEquals('FooBar',  Gears\String\studly('fooBar'));
+		$this->assertEquals('FooBar',  Gears\String\studly('foo_bar'));
+		$this->assertEquals('FooBarBaz',  Gears\String\studly('foo-barBaz'));
+		$this->assertEquals('FooBarBaz',  Gears\String\studly('foo-bar_baz'));
+	}
 }
