@@ -95,6 +95,39 @@ class StringObjectTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals('Foo Bar', Str::s('foo_bar')->to('human'));
 	}
 
+	public function testWildCardMatch()
+	{
+		$html = '<a title="foo" href="/hello">Hello World</a>';
+
+		$pattern = '<a*href="*"*>*</a>';
+
+		$matches = array
+		(
+			0 => array
+			(
+				0 => '<a title="foo" href="/hello">Hello World</a>',
+			),
+			1 => array
+			(
+				0 => ' title="foo" ',
+			),
+			2 => array
+			(
+				0 => '/hello',
+			),
+			3 => array
+			(
+				0 => '',
+			),
+			4 => array
+			(
+				0 => 'Hello World',
+			)
+		);
+
+		$this->assertEquals($matches, Str::s($html)->wildCardMatch($pattern));
+	}
+
 	public function testSearch()
 	{
 		$this->assertEquals(8, Str::s($this->string)->search('a'));

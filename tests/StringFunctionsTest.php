@@ -15,6 +15,39 @@ class StringFunctionsTest extends PHPUnit_Framework_TestCase
 {
 	protected $string = 'This is a string.';
 
+	public function testWildCardMatch()
+	{
+		$html = '<a title="foo" href="/hello">Hello World</a>';
+
+		$pattern = '<a*href="*"*>*</a>';
+
+		$matches = array
+		(
+			0 => array
+			(
+				0 => '<a title="foo" href="/hello">Hello World</a>',
+			),
+			1 => array
+			(
+				0 => ' title="foo" ',
+			),
+			2 => array
+			(
+				0 => '/hello',
+			),
+			3 => array
+			(
+				0 => '',
+			),
+			4 => array
+			(
+				0 => 'Hello World',
+			)
+		);
+
+		$this->assertEquals($matches, Gears\String\wildCardMatch($html, $pattern));
+	}
+
 	public function testSearch()
 	{
 		$this->assertEquals(8, Gears\String\search($this->string, 'a'));

@@ -12,6 +12,77 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 /**
+ * Function: wildCardMatch
+ * =============================================================================
+ * This is the lazy mans regular expression. Each wildcard "*" character will
+ * be turned into a non-gready regular expression group.
+ *
+ * ```php
+ * $html = '<a title="foo" href="/hello">Hello World</a>';
+ *
+ * $pattern = '<a*href="*"*></a>';
+ * 
+ * $matches = wildCardMatch($html, $pattern);
+ * ```
+ *
+ * The result would look like:
+ *
+ * ```php
+ * Array
+ * (
+ *     [0] => Array
+ *         (
+ *             [0] => <a title="foo" href="/hello">Hello World</a>
+ *         )
+ * 
+ *     [1] => Array
+ *         (
+ *             [0] =>  title="foo" 
+ *         )
+ * 
+ *     [2] => Array
+ *         (
+ *             [0] => /hello
+ *         )
+ * 
+ *     [3] => Array
+ *         (
+ *             [0] => 
+ *         )
+ * 
+ *     [4] => Array
+ *         (
+ *             [0] => Hello World
+ *         )
+ * 
+ * )
+ * ```
+ * 
+ * Parameters:
+ * -----------------------------------------------------------------------------
+ * $haystack - The string haystack to search.
+ * $needle - The pattern to look for.
+ * 
+ * Returns:
+ * -----------------------------------------------------------------------------
+ * array
+ */
+function wildCardMatch($haystack, $needle)
+{
+	// Quote the entire needle, so that everything is treated literally
+	$pattern = preg_quote($needle, '#');
+
+	// Then replace literal wildcards with a regular expression group
+	$pattern = str_replace('\*', '(.*?)', $pattern);
+
+	// Run the regular expression
+	preg_match_all('#'.$pattern.'#s', $haystack, $matches);
+
+	// Return the matches
+	return $matches;
+}
+
+/**
  * Function: search
  * =============================================================================
  * The search() method searches a string for a specified value,
