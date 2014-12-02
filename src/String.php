@@ -17,7 +17,7 @@ class String implements \ArrayAccess
 {
 	/*
 	 * Make this compatiable with the Laravel Str class.
-	 * That way we can easily swap in our version into a Laravel alias list.
+	 * That way we can easily swap in our version into a Laravel App.
 	 */
 	use MacroableTrait
 	{
@@ -191,7 +191,7 @@ class String implements \ArrayAccess
 	}
 	
 	/**
-	 * Method: convertToSelf
+	 * Method: returnSelf
 	 * =========================================================================
 	 * The idea behind this is to provide a fluent interface.
 	 * So that multiple calls can be chained together.
@@ -206,7 +206,7 @@ class String implements \ArrayAccess
 	 * -------------------------------------------------------------------------
 	 * mixed
 	 */
-	private function convertToSelf($input)
+	private function returnSelf($input)
 	{
 		if (is_string($input))
 		{
@@ -229,7 +229,7 @@ class String implements \ArrayAccess
 				elseif (is_array($string))
 				{
 					// Recurse into the array
-					$output[] = $this->convertToSelf($string);
+					$output[] = $this->returnSelf($string);
 				}
 				else
 				{
@@ -267,6 +267,9 @@ class String implements \ArrayAccess
 		// Create the function name
 		$func_name = '\Gears\String\\'.$name;
 
+		// Prepend the current string value to the arguments
+		array_unshift($arguments, $this->value);
+
 		// Does the function exist
 		if (!function_exists($func_name))
 		{
@@ -280,14 +283,11 @@ class String implements \ArrayAccess
 			throw new \Exception('Gears String function does not exist!');
 		}
 
-		// Prepend the current string value to the arguments
-		array_unshift($arguments, $this->value);
-
 		// Call the function
 		$result = call_user_func_array($func_name, $arguments);
 
 		// Return our selves.
-		return $this->convertToSelf($result);
+		return $this->returnSelf($result);
 	}
 
 	/**

@@ -15,6 +15,13 @@ class StringFunctionsTest extends PHPUnit_Framework_TestCase
 {
 	protected $string = 'This is a string.';
 
+	public function testIsUTF8()
+	{
+		$this->assertTrue(Gears\String\isUTF8(''));
+		$this->assertTrue(Gears\String\isUTF8('éééé'));
+		$this->assertFalse(Gears\String\isUTF8(utf8_decode('éééé')));
+	}
+
 	public function testWildCardMatch()
 	{
 		$html = '<a title="foo" href="/hello">Hello World</a>';

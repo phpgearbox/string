@@ -12,6 +12,26 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 /**
+ * Method: isUTF8
+ * =============================================================================
+ * Check if a string contains UTF-8 data.
+ * 
+ * > Credit: http://git.io/ku5LaQ
+ * 
+ * Parameters:
+ * -----------------------------------------------------------------------------
+ *  - $value: The string to check.
+ * 
+ * Returns:
+ * -----------------------------------------------------------------------------
+ * boolean
+ */
+function isUTF8($value)
+{
+	return $value === '' || preg_match('/^./su', $value) === 1;
+}
+
+/**
  * Function: wildCardMatch
  * =============================================================================
  * This is the lazy mans regular expression. Each wildcard "*" character will

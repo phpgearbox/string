@@ -95,6 +95,13 @@ class StringObjectTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals('Foo Bar', Str::s('foo_bar')->to('human'));
 	}
 
+	public function testIsUTF8()
+	{
+		$this->assertTrue(Str::s('')->isUTF8());
+		$this->assertTrue(Str::s('éééé')->isUTF8());
+		$this->assertFalse(Str::s(utf8_decode('éééé'))->isUTF8());
+	}
+
 	public function testWildCardMatch()
 	{
 		$html = '<a title="foo" href="/hello">Hello World</a>';
