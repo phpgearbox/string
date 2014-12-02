@@ -12,26 +12,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 /**
- * Method: isUTF8
- * =============================================================================
- * Check if a string contains UTF-8 data.
- * 
- * > Credit: http://git.io/ku5LaQ
- * 
- * Parameters:
- * -----------------------------------------------------------------------------
- *  - $value: The string to check.
- * 
- * Returns:
- * -----------------------------------------------------------------------------
- * boolean
- */
-function isUTF8($value)
-{
-	return $value === '' || preg_match('/^./su', $value) === 1;
-}
-
-/**
  * Function: wildCardMatch
  * =============================================================================
  * This is the lazy mans regular expression. Each wildcard "*" character will
@@ -698,6 +678,35 @@ function to($string, $what)
 			break;
 		}
 
+		case 'ascii':
+		{
+			return ascii($string);
+			break;
+		}
+
+		case 'utf8':
+		case 'UTF8':
+		case 'utf-8':
+		case 'UTF-8':
+		{
+			return toUTF8($string);
+			break;
+		}
+
+		case 'latin1':
+		case 'ISO8859':
+		case 'iso8859':
+		case 'ISO88591':
+		case 'iso88591':
+		case 'ISO-8859':
+		case 'iso-8859':
+		case 'ISO-8859-1':
+		case 'iso-8859-1':
+		{
+			return toLatin1($string);
+			break;
+		}
+
 		default:
 		{
 			return $string;
@@ -764,3 +773,18 @@ function slug() { return call_user_func_array('\Illuminate\Support\Str::slug', f
 function snake() { return call_user_func_array('\Illuminate\Support\Str::snake', func_get_args()); }
 function studly() { return call_user_func_array('\Illuminate\Support\Str::studly', func_get_args()); }
 function parseCallback() { return call_user_func_array('\Illuminate\Support\Str::parseCallback', func_get_args()); }
+
+/**
+ * Section: UTF8 Stubs
+ * =============================================================================
+ * As above the the following functions are just some stubs for UTF-8 methods.
+ * 
+ * > Credits:
+ * >   - https://github.com/neitanod/forceutf8/
+ * >   - https://github.com/nicolas-grekas/Patchwork-UTF8/
+ */
+
+function isUTF8() { return call_user_func_array('\Patchwork\Utf8::isUtf8', func_get_args()); }
+function fixUTF8() { return call_user_func_array('\ForceUTF8\Encoding::fixUTF8', func_get_args()); }
+function toUTF8() { return call_user_func_array('\ForceUTF8\Encoding::toUTF8', func_get_args()); }
+function toLatin1() { return call_user_func_array('\ForceUTF8\Encoding::toLatin1', func_get_args()); }

@@ -12,7 +12,8 @@
 	"require":
 	{
 		"illuminate/support": "4.*",
-		"patchwork/utf8": "1.1.*"
+		"patchwork/utf8": "1.1.*",
+		"neitanod/forceutf8": "1.*"
 	},
 	"require-dev":
 	{

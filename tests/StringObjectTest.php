@@ -102,6 +102,27 @@ class StringObjectTest extends PHPUnit_Framework_TestCase
 		$this->assertFalse(Str::s(utf8_decode('éééé'))->isUTF8());
 	}
 
+	public function testToUTF8()
+	{
+		$this->assertEquals('', Str::s('')->toUTF8());
+		$this->assertEquals('éééé', Str::s(utf8_decode('éééé'))->toUTF8());
+	}
+
+	public function testToLatin1()
+	{
+		$this->assertEquals('', Str::s('')->toLatin1());
+		$this->assertEquals('éééé', Str::s(utf8_encode('éééé'))->toLatin1());
+	}
+
+	public function testFixUTF8()
+	{
+		$this->assertEquals('', Str::s('')->fixUTF8());
+		$this->assertEquals('Fédération Camerounaise de Football', Str::s('FÃÂ©dération Camerounaise de Football')->fixUTF8());
+		$this->assertEquals('Fédération Camerounaise de Football', Str::s('FÃ©dÃ©ration Camerounaise de Football')->fixUTF8());
+		$this->assertEquals('Fédération Camerounaise de Football', Str::s('FÃÂ©dÃÂ©ration Camerounaise de Football')->fixUTF8());
+		$this->assertEquals('Fédération Camerounaise de Football', Str::s('FÃÂÂÂÂ©dÃÂÂÂÂ©ration Camerounaise de Football')->fixUTF8());
+	}
+
 	public function testWildCardMatch()
 	{
 		$html = '<a title="foo" href="/hello">Hello World</a>';

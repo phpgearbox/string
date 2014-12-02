@@ -24,6 +24,27 @@ class StringStaticTest extends PHPUnit_Framework_TestCase
 		$this->assertFalse(Str::isUTF8(utf8_decode('éééé')));
 	}
 
+	public function testToUTF8()
+	{
+		$this->assertEquals('', Str::toUTF8(''));
+		$this->assertEquals('éééé', Str::toUTF8(utf8_decode('éééé')));
+	}
+
+	public function testToLatin1()
+	{
+		$this->assertEquals('', Str::toLatin1(''));
+		$this->assertEquals('éééé', Str::toLatin1(utf8_encode('éééé')));
+	}
+
+	public function testFixUTF8()
+	{
+		$this->assertEquals('', Str::fixUTF8(''));
+		$this->assertEquals('Fédération Camerounaise de Football', Str::fixUTF8('FÃÂ©dération Camerounaise de Football'));
+		$this->assertEquals('Fédération Camerounaise de Football', Str::fixUTF8('FÃ©dÃ©ration Camerounaise de Football'));
+		$this->assertEquals('Fédération Camerounaise de Football', Str::fixUTF8('FÃÂ©dÃÂ©ration Camerounaise de Football'));
+		$this->assertEquals('Fédération Camerounaise de Football', Str::fixUTF8('FÃÂÂÂÂ©dÃÂÂÂÂ©ration Camerounaise de Football'));
+	}
+
 	public function testWildCardMatch()
 	{
 		$html = '<a title="foo" href="/hello">Hello World</a>';

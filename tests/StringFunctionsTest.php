@@ -22,6 +22,27 @@ class StringFunctionsTest extends PHPUnit_Framework_TestCase
 		$this->assertFalse(Gears\String\isUTF8(utf8_decode('éééé')));
 	}
 
+	public function testToUTF8()
+	{
+		$this->assertEquals('', Gears\String\toUTF8(''));
+		$this->assertEquals('éééé', Gears\String\toUTF8(utf8_decode('éééé')));
+	}
+
+	public function testToLatin1()
+	{
+		$this->assertEquals('', Gears\String\toLatin1(''));
+		$this->assertEquals('éééé', Gears\String\toLatin1(utf8_encode('éééé')));
+	}
+
+	public function testFixUTF8()
+	{
+		$this->assertEquals('', Gears\String\fixUTF8(''));
+		$this->assertEquals('Fédération Camerounaise de Football', Gears\String\fixUTF8('FÃÂ©dération Camerounaise de Football'));
+		$this->assertEquals('Fédération Camerounaise de Football', Gears\String\fixUTF8('FÃ©dÃ©ration Camerounaise de Football'));
+		$this->assertEquals('Fédération Camerounaise de Football', Gears\String\fixUTF8('FÃÂ©dÃÂ©ration Camerounaise de Football'));
+		$this->assertEquals('Fédération Camerounaise de Football', Gears\String\fixUTF8('FÃÂÂÂÂ©dÃÂÂÂÂ©ration Camerounaise de Football'));
+	}
+
 	public function testWildCardMatch()
 	{
 		$html = '<a title="foo" href="/hello">Hello World</a>';
