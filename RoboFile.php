@@ -39,8 +39,6 @@ class RoboFile extends Robo\Tasks
 	 */
 	public function test()
 	{
-		$this->taskPHPUnit()
-			->arg('./tests')
-		->run();
+		exit($this->taskPHPUnit()->arg('./tests')->run()->getExitCode());
 	}
 }
