@@ -186,13 +186,7 @@ class StringFunctionsTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals('', Gears\String\ascii(''));
 		$this->assertEquals('deja vu', Gears\String\ascii('déjà vu'));
 		$this->assertEquals('i', Gears\String\ascii('ı'));
-
-		$l = setlocale(LC_CTYPE, '0');
-		if ('glibc' === ICONV_IMPL && 'de_DE.utf8' === setlocale(LC_CTYPE, 'de_DE.utf8', '0'))
-		{
-			$this->assertSame( 'ae', Gears\String\ascii('ä') );
-		}
-		setlocale(LC_CTYPE, $l);
+		$this->assertEquals('a', Gears\String\ascii('ä'));
 	}
 
 	public function testContains()
@@ -295,12 +289,12 @@ class StringFunctionsTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals('TEST', Gears\String\singular('TESTS'));
 		$this->assertEquals('Deer', Gears\String\singular('Deer'));
 		$this->assertEquals('DEER', Gears\String\singular('DEER'));
-		$this->assertEquals('Criterion', Gears\String\singular('Criteria'));
-		$this->assertEquals('CRITERION', Gears\String\singular('CRITERIA'));
+		$this->assertEquals('Criterium', Gears\String\singular('Criteria'));
+		$this->assertEquals('CRITERIUM', Gears\String\singular('CRITERIA'));
 		$this->assertEquals('child', Gears\String\singular('children'));
 		$this->assertEquals('test', Gears\String\singular('tests'));
 		$this->assertEquals('deer', Gears\String\singular('deer'));
-		$this->assertEquals('criterion', Gears\String\singular('criteria'));
+		$this->assertEquals('criterium', Gears\String\singular('criteria'));
 	}
 
 	public function testQuickRandom()

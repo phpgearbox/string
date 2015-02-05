@@ -188,13 +188,7 @@ class StringStaticTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals('', Str::ascii(''));
 		$this->assertEquals('deja vu', Str::ascii('déjà vu'));
 		$this->assertEquals('i', Str::ascii('ı'));
-
-		$l = setlocale(LC_CTYPE, '0');
-		if ('glibc' === ICONV_IMPL && 'de_DE.utf8' === setlocale(LC_CTYPE, 'de_DE.utf8', '0'))
-		{
-			$this->assertSame( 'ae', Str::ascii('ä') );
-		}
-		setlocale(LC_CTYPE, $l);
+		$this->assertEquals('a', Str::ascii('ä'));
 	}
 
 	public function testContains()
@@ -297,12 +291,12 @@ class StringStaticTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals('TEST', Str::singular('TESTS'));
 		$this->assertEquals('Deer', Str::singular('Deer'));
 		$this->assertEquals('DEER', Str::singular('DEER'));
-		$this->assertEquals('Criterion', Str::singular('Criteria'));
-		$this->assertEquals('CRITERION', Str::singular('CRITERIA'));
+		$this->assertEquals('Criterium', Str::singular('Criteria'));
+		$this->assertEquals('CRITERIUM', Str::singular('CRITERIA'));
 		$this->assertEquals('child', Str::singular('children'));
 		$this->assertEquals('test', Str::singular('tests'));
 		$this->assertEquals('deer', Str::singular('deer'));
-		$this->assertEquals('criterion', Str::singular('criteria'));
+		$this->assertEquals('criterium', Str::singular('criteria'));
 	}
 
 	public function testQuickRandom()

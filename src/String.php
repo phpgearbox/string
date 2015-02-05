@@ -11,7 +11,7 @@
 // -----------------------------------------------------------------------------
 ////////////////////////////////////////////////////////////////////////////////
 
-use \Illuminate\Support\Traits\MacroableTrait;
+use \Illuminate\Support\Traits\Macroable;
 
 class String implements \ArrayAccess
 {
@@ -19,7 +19,7 @@ class String implements \ArrayAccess
 	 * Make this compatiable with the Laravel Str class.
 	 * That way we can easily swap in our version into a Laravel App.
 	 */
-	use MacroableTrait
+	use Macroable
 	{
 		__callStatic as __macroCallStatic;
 		__call as __macroCall;

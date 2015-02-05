@@ -258,13 +258,7 @@ class StringObjectTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals('', Str::s('')->ascii());
 		$this->assertEquals('deja vu', Str::s('déjà vu')->ascii());
 		$this->assertEquals('i', Str::s('ı')->ascii());
-
-		$l = setlocale(LC_CTYPE, '0');
-		if ('glibc' === ICONV_IMPL && 'de_DE.utf8' === setlocale(LC_CTYPE, 'de_DE.utf8', '0'))
-		{
-			$this->assertSame('ae', Str::s('ä')->ascii()->toString());
-		}
-		setlocale(LC_CTYPE, $l);
+		$this->assertEquals('a', Str::s('ä')->ascii()->toString());
 	}
 
 	public function testContains()
@@ -358,12 +352,12 @@ class StringObjectTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals('TEST', Str::s('TESTS')->singular());
 		$this->assertEquals('Deer', Str::s('Deer')->singular());
 		$this->assertEquals('DEER', Str::s('DEER')->singular());
-		$this->assertEquals('Criterion', Str::s('Criteria')->singular());
-		$this->assertEquals('CRITERION', Str::s('CRITERIA')->singular());
+		$this->assertEquals('Criterium', Str::s('Criteria')->singular());
+		$this->assertEquals('CRITERIUM', Str::s('CRITERIA')->singular());
 		$this->assertEquals('child', Str::s('children')->singular());
 		$this->assertEquals('test', Str::s('tests')->singular());
 		$this->assertEquals('deer', Str::s('deer')->singular());
-		$this->assertEquals('criterion', Str::s('criteria')->singular());
+		$this->assertEquals('criterium', Str::s('criteria')->singular());
 	}
 
 	public function testTitle()
