@@ -1,4 +1,4 @@
-<?php
+<?php namespace Gears\String\Methods;
 ////////////////////////////////////////////////////////////////////////////////
 // __________ __             ________                   __________
 // \______   \  |__ ______  /  _____/  ____ _____ ______\______   \ _______  ___
@@ -11,16 +11,27 @@
 // -----------------------------------------------------------------------------
 ////////////////////////////////////////////////////////////////////////////////
 
-/*
- * Include our local composer autoloader just in case
- * we are called with a globally installed version of robo.
- */
-require_once(__DIR__.'/vendor/autoload.php');
+use voku\helper\UTF8;
 
-class RoboFile extends Robo\Tasks
+trait Has
 {
-	public function test()
+    /**
+	 * Does the string have at least one lower case character?
+	 *
+	 * @return bool Whether or not the string contains a lower case character.
+	 */
+	public function hasLowerCase()
 	{
-		exit($this->taskPHPUnit()->arg('./tests')->run()->getExitCode());
+		return $this->matchesPattern('.*[[:lower:]]');
+	}
+
+	/**
+	 * Does the string have at least one upper case character?
+	 *
+	 * @return bool Whether or not the string contains an upper case character.
+	 */
+	public function hasUpperCase()
+	{
+		return $this->matchesPattern('.*[[:upper:]]');
 	}
 }

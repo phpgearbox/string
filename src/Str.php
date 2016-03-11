@@ -1,4 +1,4 @@
-<?php
+<?php namespace Gears\String;
 ////////////////////////////////////////////////////////////////////////////////
 // __________ __             ________                   __________
 // \______   \  |__ ______  /  _____/  ____ _____ ______\______   \ _______  ___
@@ -11,16 +11,21 @@
 // -----------------------------------------------------------------------------
 ////////////////////////////////////////////////////////////////////////////////
 
-/*
- * Include our local composer autoloader just in case
- * we are called with a globally installed version of robo.
- */
-require_once(__DIR__.'/vendor/autoload.php');
-
-class RoboFile extends Robo\Tasks
+class Str extends Base
 {
-	public function test()
-	{
-		exit($this->taskPHPUnit()->arg('./tests')->run()->getExitCode());
-	}
+	use Methods\To;
+	use Methods\Is;
+	use Methods\Pad;
+	use Methods\Misc;
+	use Methods\Html;
+	use Methods\Regx;
+	use Methods\Remove;
+	use Methods\Ensure;
+	use Methods\IndexOf;
+	use Methods\Replace;
+	use Methods\Contains;
+	use Methods\FirstLast;
+	use Methods\StartEndWith;
+	use Methods\LongestCommon;
+	use Methods\CaseManipulators;
 }
