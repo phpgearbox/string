@@ -15,30 +15,14 @@ use voku\helper\UTF8;
 
 trait Html
 {
-	/**
-	 * Escapes html
-	 *
-	 * @return static
-	 */
-	public function htmlEscape()
-	{
-		return $this->newSelf
-		(
-			UTF8::htmlspecialchars
-			(
-				$this->scalarString,
-				ENT_QUOTES | ENT_SUBSTITUTE,
-				$this->encoding
-			)
-		);
-	}
-
     /**
 	 * Convert all HTML entities to their applicable characters.
 	 *
+	 * @see http://php.net/manual/en/function.html-entity-decode.php
+	 *
 	 * @param  int|null $flags Optional flags
 	 *
-	 * @return static   String with the resulting $str after being html decoded.
+	 * @return static          String after being html decoded.
 	 */
 	public function htmlDecode($flags = ENT_COMPAT)
 	{
@@ -56,25 +40,48 @@ trait Html
 	/**
 	 * Convert all applicable characters to HTML entities.
 	 *
-	 * @param  int|null $flags Optional flags
+	 * @see http://php.net/manual/en/function.htmlentities.php
 	 *
-	 * @return static   String with the resulting $str after being html encoded.
+	 * @param  int|null $flags        Optional flags.
+	 *
+	 * @param  bool     $doubleEncode When double_encode is turned off PHP
+	 *                                will not encode existing html entities.
+	 *                                The default is to convert everything.
+	 *
+	 * @return static                 String after being html encoded.
 	 */
-	public function htmlEncode($flags = ENT_COMPAT)
+	public function htmlEncode($flags = null, $doubleEncode = true)
 	{
+		if ($flags === null) $flags = ENT_QUOTES | ENT_SUBSTITUTE;
+
 		return $this->newSelf
 		(
 			UTF8::htmlentities
 			(
 				$this->scalarString,
 				$flags,
-				$this->encoding
+				$this->encoding,
+				$doubleEncode
 			)
 		);
 	}
 
     /**
-     * remove xss from html
+     * Sanitizes data so that Cross Site Scripting Hacks can be prevented.
+     *
+     * This method does a fair amount of work and it is extremely thorough,
+     * designed to prevent even the most obscure XSS attempts. Nothing is ever
+     * 100% foolproof, of course, but I haven't been able to get anything passed
+     * the filter.
+     *
+     * > NOTE: Should only be used to deal with data upon submission.
+     * > It's not something that should be used for general runtime processing.
+     *
+     * __In other words it is still critically important
+     * to escape anything that you output!!!__
+     *
+     * This uses a packaged version of the Anti XSS Library from CodeIgniter.
+     * @see https://github.com/voku/anti-xss
      *
      * @return static
      */
@@ -102,9 +109,14 @@ trait Html
     }
 
     /**
-     * remove html
+     * Strip HTML and PHP tags from a string.
      *
-     * @param $allowableTags
+     * This function tries to return a string with all NULL bytes,
+     * HTML and PHP tags stripped from a given str.
+     *
+     * @param  string  $allowableTags You can use the optional second parameter
+     *                                to specify tags which should not be
+     *                                stripped.
      *
      * @return static
      */

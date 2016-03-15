@@ -11,18 +11,43 @@
 // -----------------------------------------------------------------------------
 ////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * Str Class
+ *
+ * One of the motivations behind this project was that the original "Stringy"
+ * class was just so ridiculously long @ 1800+ lines and 85 odd methods.
+ *
+ * I wanted to see if it could be built using traits to provide some sort of
+ * organisation to the methods. This class simply lists all the traits that
+ * now provide the functionality that the old "Stringy" used to.
+ *
+ * Naturally I have added some of my own methods and made other modifications...
+ *
+ * @package Gears\String
+ */
 class Str extends Base
 {
 	use Methods\To;
 	use Methods\Is;
+
+	// TODO: Still needs refactoring...
 	use Methods\Pad;
+
 	use Methods\Misc;
 	use Methods\Html;
 	use Methods\Regx;
+
+	// TODO: Still needs refactoring...
 	use Methods\Remove;
+
 	use Methods\Ensure;
+	use Methods\Between;
 	use Methods\IndexOf;
+
+	// TODO: Still needs refactoring...
 	use Methods\Replace;
+	
+	use Methods\Truncate;
 	use Methods\Contains;
 	use Methods\FirstLast;
 	use Methods\StartEndWith;

@@ -20,10 +20,12 @@ trait IndexOf
 	 * and false if not found. Accepts an optional offset from which to begin
 	 * the search.
 	 *
-	 * @param  string $needle Substring to look for
-	 * @param  int    $offset Offset from which to search
+	 * @param  string   $needle Substring to look for.
 	 *
-	 * @return int|bool The occurrence's index if found, otherwise false
+	 * @param  int      $offset Offset from which to search.
+	 *
+	 * @return int|bool         The occurrence's index if found,
+	 *                          otherwise false.
 	 */
 	public function indexOf($needle, $offset = 0)
 	{
@@ -42,10 +44,12 @@ trait IndexOf
 	 * the search. Offsets may be negative to count from the last character
 	 * in the string.
 	 *
-	 * @param  string $needle Substring to look for
-	 * @param  int    $offset Offset from which to search
+	 * @param  string   $needle Substring to look for.
 	 *
-	 * @return int|bool The last occurrence's index if found, otherwise false
+	 * @param  int      $offset Offset from which to search.
+	 *
+	 * @return int|bool         The last occurrence's index if found,
+	 *                          otherwise false.
 	 */
 	public function indexOfLast($needle, $offset = 0)
 	{

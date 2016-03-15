@@ -398,6 +398,8 @@ trait To
     /**
      * Returns a trimmed string with the first letter capitalized.
      *
+     * TODO: Be smarter and capitalise after every period.
+     *
      * @return static
      */
     public function toSentenceCase()

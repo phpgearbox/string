@@ -13,6 +13,14 @@
 
 use voku\helper\UTF8;
 
+/**
+ * Base Str Class
+ *
+ * This class provides all the basic functionality to make the Str object
+ * behave almost like a normal scalar string. Such as array access and length.
+ *
+ * @package Gears\String
+ */
 class Base implements \Countable, \ArrayAccess, \IteratorAggregate
 {
 	/**
@@ -102,11 +110,6 @@ class Base implements \Countable, \ArrayAccess, \IteratorAggregate
 		// Store the string internally.
 		$this->scalarString = (string)$string;
 
-		// Don't throw a notice on PHP 5.3
-		// ENT_SUBSTITUTE was added in PHP 5.4
-		// @see http://php.net/manual/en/function.htmlspecialchars.php
-		if (!defined('ENT_SUBSTITUTE')) define('ENT_SUBSTITUTE', 8);
-
 		// Intialise Voku's UTF8 portability layer.
 		UTF8::checkForSupport();
 
@@ -149,7 +152,10 @@ class Base implements \Countable, \ArrayAccess, \IteratorAggregate
 	}
 
 	/**
-	 * Helper method, used internally to copy the encoding to new Str objects.
+	 * Helper method, used internally.
+	 *
+	 * Basically all this does is saves us a few key strokes by copying
+	 * the current encoding to the next Str object we are creating.
 	 *
 	 * @param  string $string
 	 * @return static
@@ -157,6 +163,42 @@ class Base implements \Countable, \ArrayAccess, \IteratorAggregate
 	protected function newSelf($string)
 	{
 		return static::s($string, $this->encoding);
+	}
+
+	/**
+	 * Helper method, used internally.
+	 *
+	 * Given an array of scalar strings we will convert all them to Str objects.
+	 *
+	 * > NOTE: This method is recursive.
+	 *
+	 * @param  array $input
+	 * @return static[]
+	 */
+	protected function newSelfs(array $input)
+	{
+		$strObjects = [];
+
+		foreach ($input as $key => $value)
+		{
+			if (is_string($value))
+			{
+				// Convert the scalar string to a Str Object
+				$strObjects[$key] = $this->newSelf($value);
+			}
+			elseif (is_array($string))
+			{
+				// Recurse into the array
+				$strObjects[$key] = $this->newSelfs($string);
+			}
+			else
+			{
+				// We don't know what it is do do nothing to it
+				$strObjects[$key] = $value;
+			}
+		}
+
+		return $strObjects;
 	}
 
 	/**

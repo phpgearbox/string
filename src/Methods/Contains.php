@@ -16,14 +16,16 @@ use voku\helper\UTF8;
 trait Contains
 {
     /**
-	 * Returns true if the string contains $needle, false otherwise. By default
-	 * the comparison is case-sensitive, but can be made insensitive by setting
-	 * $caseSensitive to false.
+	 * Returns true if the string contains $needle, false otherwise.
 	 *
-	 * @param  string $needle        Substring to look for
-	 * @param  bool   $caseSensitive Whether or not to enforce case-sensitivity
+	 * By default the comparison is case-sensitive, but can be made
+	 * insensitive by setting $caseSensitive to false.
 	 *
-	 * @return bool   Whether or not $str contains $needle
+	 * @param  string $needle        Substring to look for.
+	 *
+	 * @param  bool   $caseSensitive Whether or not to enforce case-sensitivity.
+	 *
+	 * @return bool                  Whether or not $str contains $needle.
 	 */
 	public function contains($needle, $caseSensitive = true)
 	{
@@ -38,18 +40,19 @@ trait Contains
 	}
 
 	/**
-	 * Returns true if the string contains all $needles, false otherwise. By
-	 * default the comparison is case-sensitive, but can be made insensitive by
-	 * setting $caseSensitive to false.
+	 * Returns true if the string contains all $needles, false otherwise.
 	 *
-	 * @param  array $needles       SubStrings to look for
-	 * @param  bool  $caseSensitive Whether or not to enforce case-sensitivity
+	 * By default the comparison is case-sensitive, but can be made
+	 * insensitive by setting $caseSensitive to false.
 	 *
-	 * @return bool   Whether or not $str contains $needle
+	 * @param  array $needles       SubStrings to look for.
+	 *
+	 * @param  bool  $caseSensitive Whether or not to enforce case-sensitivity.
+	 *
+	 * @return bool                 Whether or not $str contains $needle.
 	 */
 	public function containsAll($needles, $caseSensitive = true)
 	{
-		/** @noinspection IsEmptyFunctionUsageInspection */
 		if (empty($needles)) return false;
 
 		foreach ($needles as $needle)
@@ -61,18 +64,19 @@ trait Contains
 	}
 
 	/**
-	 * Returns true if the string contains any $needles, false otherwise. By
-	 * default the comparison is case-sensitive, but can be made insensitive by
-	 * setting $caseSensitive to false.
+	 * Returns true if the string contains any $needles, false otherwise.
 	 *
-	 * @param  array $needles       SubStrings to look for
-	 * @param  bool  $caseSensitive Whether or not to enforce case-sensitivity
+	 * By default the comparison is case-sensitive, but can be made
+	 * insensitive by setting $caseSensitive to false.
 	 *
-	 * @return bool   Whether or not $str contains $needle
+	 * @param  array $needles       SubStrings to look for.
+	 *
+	 * @param  bool  $caseSensitive Whether or not to enforce case-sensitivity.
+	 *
+	 * @return bool                 Whether or not $str contains $needle.
 	 */
 	public function containsAny($needles, $caseSensitive = true)
 	{
-		/** @noinspection IsEmptyFunctionUsageInspection */
 		if (empty($needles)) return false;
 
 		foreach ($needles as $needle)
@@ -85,13 +89,15 @@ trait Contains
 
 	/**
 	 * Returns the number of occurrences of $substring in the given string.
-	 * By default, the comparison is case-sensitive, but can be made insensitive
-	 * by setting $caseSensitive to false.
 	 *
-	 * @param  string $substring     The substring to search for
-	 * @param  bool   $caseSensitive Whether or not to enforce case-sensitivity
+	 * By default, the comparison is case-sensitive, but can be made
+	 * insensitive by setting $caseSensitive to false.
 	 *
-	 * @return int    The number of $substring occurrences
+	 * @param  string $substring     The substring to search for.
+	 * 
+	 * @param  bool   $caseSensitive Whether or not to enforce case-sensitivity.
+	 *
+	 * @return int                   The number of $substring occurrences
 	 */
 	public function countSubstr($substring, $caseSensitive = true)
 	{
