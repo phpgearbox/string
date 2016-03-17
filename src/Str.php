@@ -29,24 +29,15 @@ class Str extends Base
 {
 	use Methods\To;
 	use Methods\Is;
-
-	// TODO: Still needs refactoring...
 	use Methods\Pad;
-
 	use Methods\Misc;
 	use Methods\Html;
 	use Methods\Regx;
-
-	// TODO: Still needs refactoring...
 	use Methods\Remove;
-
 	use Methods\Ensure;
 	use Methods\Between;
 	use Methods\IndexOf;
-
-	// TODO: Still needs refactoring...
 	use Methods\Replace;
-	
 	use Methods\Truncate;
 	use Methods\Contains;
 	use Methods\FirstLast;

@@ -18,41 +18,37 @@ trait Remove
     /**
      * Returns a new string with the prefix $substring removed, if present.
      *
-     * @param  string $substring The prefix to remove
+     * @param  string $substring The prefix to remove.
      *
-     * @return Stringy Object having a $str without the prefix $substring
+     * @return static            String without the prefix $substring.
      */
     public function removeLeft($substring)
     {
-      $stringy = static::create($this->str, $this->encoding);
+        if ($this->startsWith($substring))
+        {
+            // TODO: Got a funny feeling I removed the substr method...
+            return $this->substr(UTF8::strlen($substring, $this->encoding));
+        }
 
-      if ($stringy->startsWith($substring)) {
-        $substringLength = UTF8::strlen($substring, $stringy->encoding);
-
-        return $stringy->substr($substringLength);
-      }
-
-      return $stringy;
+        return $this;
     }
 
     /**
      * Returns a new string with the suffix $substring removed, if present.
      *
-     * @param  string $substring The suffix to remove
+     * @param  string $substring The suffix to remove.
      *
-     * @return Stringy Object having a $str without the suffix $substring
+     * @return static            String without the suffix $substring.
      */
     public function removeRight($substring)
     {
-      $stringy = static::create($this->str, $this->encoding);
+        if ($this->endsWith($substring))
+        {
+            // TODO: Got a funny feeling I removed the substr method...
+            return $this->substr(0, $this->getLength() - UTF8::strlen($substring, $this->encoding));
+        }
 
-      if ($stringy->endsWith($substring)) {
-        $substringLength = UTF8::strlen($substring, $stringy->encoding);
-
-        return $stringy->substr(0, $stringy->length() - $substringLength);
-      }
-
-      return $stringy;
+        return $this;
     }
 
     /**
