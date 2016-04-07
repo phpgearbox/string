@@ -30,6 +30,7 @@ class Str extends Base
 	use Methods\To;
 	use Methods\Is;
 	use Methods\Pad;
+	use Methods\Has;
 	use Methods\Misc;
 	use Methods\Html;
 	use Methods\Regx;

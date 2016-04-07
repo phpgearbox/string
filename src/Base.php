@@ -186,10 +186,10 @@ class Base implements \Countable, \ArrayAccess, \IteratorAggregate
 				// Convert the scalar string to a Str Object
 				$strObjects[$key] = $this->newSelf($value);
 			}
-			elseif (is_array($string))
+			elseif (is_array($value))
 			{
 				// Recurse into the array
-				$strObjects[$key] = $this->newSelfs($string);
+				$strObjects[$key] = $this->newSelfs($value);
 			}
 			else
 			{

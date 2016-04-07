@@ -93,7 +93,7 @@ trait Html
 		{
 			if (class_exists('\\voku\\helper\\AntiXSS'))
 			{
-				$antiXss = new voku\helper\AntiXSS();
+				$antiXss = new \voku\helper\AntiXSS();
 			}
 			else
 			{

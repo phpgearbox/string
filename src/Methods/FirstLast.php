@@ -28,7 +28,13 @@ trait FirstLast
 
         if ($n > 0)
         {
-            $first = UTF8::substr($this->scalarString, 0, $n, $this->encoding);
+            $first = UTF8::substr
+            (
+                $this->scalarString,
+                0,
+                $n,
+                $this->encoding
+            );
         }
 
         return $this->newSelf($first);
@@ -47,9 +53,15 @@ trait FirstLast
 
         if ($n > 0)
         {
-            $last = UTF8::substr($this->scalarString, 0, -$n, $this->encoding);
+            $last = UTF8::substr
+            (
+                $this->scalarString,
+                -$n,
+                null,
+                $this->encoding
+            );
         }
 
-        return $this->newSelf($first);
+        return $this->newSelf($last);
     }
 }

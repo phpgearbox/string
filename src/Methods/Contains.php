@@ -86,34 +86,4 @@ trait Contains
 
 		return false;
 	}
-
-	/**
-	 * Returns the number of occurrences of $substring in the given string.
-	 *
-	 * By default, the comparison is case-sensitive, but can be made
-	 * insensitive by setting $caseSensitive to false.
-	 *
-	 * @param  string $substring     The substring to search for.
-	 * 
-	 * @param  bool   $caseSensitive Whether or not to enforce case-sensitivity.
-	 *
-	 * @return int                   The number of $substring occurrences
-	 */
-	public function countSubstr($substring, $caseSensitive = true)
-	{
-		if ($caseSensitive)
-		{
-			return UTF8::substr_count
-			(
-				$this->scalarString,
-				$substring,
-				$this->encoding
-			);
-		}
-
-		$str = UTF8::strtoupper($this->scalarString, $this->encoding);
-		$substring = UTF8::strtoupper($substring, $this->encoding);
-
-		return UTF8::substr_count($str, $substring, $this->encoding);
-	}
 }

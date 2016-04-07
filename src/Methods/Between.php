@@ -74,7 +74,7 @@ trait Between
         $find = '/'.preg_quote($start, '/').'(.*?)'.preg_quote($end, '/').'/su';
 
         // Run the regular expression
-        if (preg_match_all($find, $haystack, $matches) !== false)
+        if (preg_match_all($find, $this->scalarString, $matches) !== false)
         {
             return $this->newSelfs($matches);
         }
