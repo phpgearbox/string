@@ -128,6 +128,18 @@ class Base implements \Countable, \ArrayAccess, \IteratorAggregate
 	}
 
 	/**
+	 * Magic method to automatically turn a Str back into a scalar string.
+	 *
+	 * @see http://php.net/manual/en/language.oop5.magic.php#object.tostring
+	 *
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return $this->scalarString;
+	}
+
+	/**
 	 * Factory method to create a new Gears\String\Str object.
 	 *
 	 * @param mixed  $string             Must be a scalar string or an object

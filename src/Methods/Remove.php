@@ -26,8 +26,16 @@ trait Remove
     {
         if ($this->startsWith($substring))
         {
-            // TODO: Got a funny feeling I removed the substr method...
-            return $this->substr(UTF8::strlen($substring, $this->encoding));
+            return $this->newSelf
+            (
+                UTF8::substr
+                (
+                    $this->scalarString,
+                    UTF8::strlen($substring, $this->encoding),
+                    null,
+                    $this->encoding
+                )
+            );
         }
 
         return $this;
@@ -44,8 +52,16 @@ trait Remove
     {
         if ($this->endsWith($substring))
         {
-            // TODO: Got a funny feeling I removed the substr method...
-            return $this->substr(0, $this->getLength() - UTF8::strlen($substring, $this->encoding));
+            return $this->newSelf
+            (
+                UTF8::substr
+                (
+                    $this->scalarString,
+                    0,
+                    $this->getLength() - UTF8::strlen($substring, $this->encoding),
+                    $this->encoding
+                )
+            );
         }
 
         return $this;

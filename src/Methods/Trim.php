@@ -75,7 +75,7 @@ trait Trim
 		}
 		else
 		{
-			return preg_quote($chars, '/');
+			return preg_quote($chars, $this->regexDelimiter);
 		}
     }
 }

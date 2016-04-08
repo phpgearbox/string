@@ -88,7 +88,7 @@ trait LongestCommon
 		$otherLength = UTF8::strlen($otherStr, $this->encoding);
 
 		// Return if either string is empty
-		if ($strLength == 0 || $otherLength == 0) return $this->newSelf();
+		if ($strLength == 0 || $otherLength == 0) return $this->newSelf('');
 
 		$len = 0; $end = 0;
 		$table = array_fill(0, $strLength + 1, array_fill(0, $otherLength + 1, 0));

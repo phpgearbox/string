@@ -18,7 +18,7 @@ class BaseStrTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException
         (
-            \InvalidArgumentException::class,
+            'InvalidArgumentException',
             'Passed value cannot be an array'
         );
 
@@ -34,11 +34,20 @@ class BaseStrTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException
         (
-            \InvalidArgumentException::class,
+            'InvalidArgumentException',
             'Passed object must have a __toString method'
         );
 
         new Str(new \stdClass());
+    }
+
+    public function testToStringMagicMethod()
+    {
+        $str = new Str('öäü - foo');
+        $result = $str->__toString();
+        $this->assertTrue(is_string($result));
+        $this->assertEquals((string)$str, $result);
+        $this->assertEquals('öäü - foo', $result);
     }
 
     public function testDefaultEncoding()
@@ -91,7 +100,7 @@ class BaseStrTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException
         (
-            \OutOfBoundsException::class,
+            'OutOfBoundsException',
             'No character exists at the index'
         );
 
@@ -102,7 +111,7 @@ class BaseStrTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException
         (
-            \Exception::class,
+            'Exception',
             'Str object is immutable, cannot modify char'
         );
 
@@ -113,7 +122,7 @@ class BaseStrTest extends PHPUnit_Framework_TestCase
     {
         $this->setExpectedException
         (
-            \Exception::class,
+            'Exception',
             'Str object is immutable, cannot unset char'
         );
 

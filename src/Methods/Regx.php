@@ -16,6 +16,29 @@ use Gears\String\Exceptions\PcreException;
 
 trait Regx
 {
+	/**
+	 * The delimiter we will use for all regular expressions.
+	 *
+	 * @see http://php.net/manual/en/regexp.reference.delimiters.php
+	 *
+	 * @var string
+	 */
+	protected $regexDelimiter = '/';
+
+	/**
+	 * Allows you to change the the default regular expression delimiter.
+	 *
+	 * @param string $value The delimiter to use for all future expressions.
+	 *
+	 * @return static
+	 */
+	public function setRegexDelimiter($value)
+	{
+		$this->regexDelimiter = $value;
+
+		return $this;
+	}
+
     /**
 	 * Returns true if the string matches the supplied pattern, false otherwise.
 	 *
@@ -32,8 +55,16 @@ trait Regx
 		// Ensure the options contain the "u" modifier.
 		if (!$this->newSelf($options)->contains('u')) $options .= 'u';
 
+		// Build the expression
+		$expression =
+			$this->regexDelimiter.
+			$pattern.
+			$this->regexDelimiter.
+			$options
+		;
+
 		// Run the expression
-		$result = preg_match('/'.$pattern.'/'.$options, $this->scalarString);
+		$result = preg_match($expression, $this->scalarString);
 
 		// If no errors return true or false based on number of matches found.
 		if ($result !== false) return $result === 1;
@@ -64,13 +95,16 @@ trait Regx
 		// Ensure the options contain the "u" modifier.
 		if (!$this->newSelf($options)->contains('u')) $options .= 'u';
 
+		// Build the expression
+		$expression =
+			$this->regexDelimiter.
+			$pattern.
+			$this->regexDelimiter.
+			$options
+		;
+
 		// Run the regular expression replacement
-		$replaced = preg_replace
-		(
-			'/'.$pattern.'/'.$options,
-			$replacement,
-			$this->scalarString
-		);
+		$replaced = preg_replace($expression, $replacement, $this->scalarString);
 
 		// If no errors return the replacement
 		if ($replaced !== null) return $this->newSelf($replaced);
@@ -86,9 +120,13 @@ trait Regx
      *
      * @param  int      $limit   Optional maximum number of results to return.
      *
+     * @param  bool     $quote   By default this method will run the provided
+     *                           $pattern through preg_quote(), this allows the
+     *                           method to be used to split on simple substrings.
+     *
      * @return static[]          An array of Str objects.
      */
-    public function split($pattern, $limit = null)
+    public function split($pattern, $limit = null, $quote = true)
     {
 		// Not sure why you would do this but your wish is our command :)
         if ($limit === 0) return [];
@@ -111,19 +149,26 @@ trait Regx
 		// TODO: As per the above comments, all well and good but we are not
 		// using UTF8::split here, we are using preg_split???
 
+		// Build the expression
+		$expression = $this->regexDelimiter;
+
+		if ($quote === true)
+		{
+			$expression .= preg_quote($pattern, $this->regexDelimiter);
+		}
+		else
+		{
+			$expression .= $pattern;
+		}
+
+		$expression .= $this->regexDelimiter.'u';
+
 		// Split the string
-		$pattern = '/' . preg_quote($pattern, '/') . '/u';
-        $array = preg_split($pattern, $this->scalarString, $limit);
+        $array = preg_split($expression, $this->scalarString, $limit);
 
 		// Remove any remaining unsplit string.
         if ($limit > 0 && count($array) === $limit) array_pop($array);
 
-		// Convert each of the splits into the Str objects.
-        for ($i = 0; $i < count($array); $i++)
-        {
-            $array[$i] = $this->newSelf($array[$i]);
-        }
-
-        return $array;
+        return $this->newSelfs($array);
     }
 }

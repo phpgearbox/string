@@ -15,18 +15,6 @@ use voku\helper\UTF8;
 
 trait To
 {
-    /**
-	 * Magic method to automatically turn a Str back into a scalar string.
-	 *
-	 * @see http://php.net/manual/en/language.oop5.magic.php#object.tostring
-	 *
-	 * @return string
-	 */
-	public function __toString()
-	{
-		return $this->scalarString;
-	}
-
 	/**
 	 * Explicitly turn Str back into a scalar string.
 	 *

@@ -34,6 +34,7 @@ class Str extends Base
 	use Methods\Misc;
 	use Methods\Html;
 	use Methods\Regx;
+	use Methods\Trim;
 	use Methods\Remove;
 	use Methods\Ensure;
 	use Methods\Between;

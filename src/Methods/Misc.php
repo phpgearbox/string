@@ -77,7 +77,7 @@ trait Misc
      */
     public function lines()
     {
-        return $this->split('[\r\n]{1,2}');
+        return $this->split('[\r\n]{1,2}', null, false);
     }
 
     /**
