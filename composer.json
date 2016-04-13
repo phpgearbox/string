@@ -14,7 +14,8 @@
 	"require":
 	{
 		"php": "^5.4 || ^7.0",
-		"voku/portable-utf8": "^2.0"
+		"voku/portable-utf8": "^2.0",
+		"icecave/parity": "^1.0"
 	},
 	"require-dev":
 	{

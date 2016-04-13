@@ -128,4 +128,17 @@ class BaseStrTest extends PHPUnit_Framework_TestCase
 
         unset(Str::s('foo')[0]);
     }
+
+    public function testCompare()
+    {
+        $this->assertEquals(0, Str::s('foo')->compare(Str::s('foo')));
+        $this->assertEquals(-4, Str::s('foo')->compare(Str::s('bar')));
+    }
+
+    public function testEquals()
+    {
+        $this->assertTrue(Str::s('foo')->equals(Str::s('foo')));
+        $this->assertFalse(Str::s('foo')->equals(Str::s('bar')));
+        $this->assertFalse(Str::s('foo')->equals('foo'));
+    }
 }

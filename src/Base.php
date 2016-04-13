@@ -12,6 +12,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 use voku\helper\UTF8;
+use Icecave\Parity\Parity;
+use Icecave\Parity\SubClassComparableInterface as Comparable;
 
 /**
  * Base Str Class
@@ -21,7 +23,7 @@ use voku\helper\UTF8;
  *
  * @package Gears\String
  */
-class Base implements \Countable, \ArrayAccess, \IteratorAggregate
+class Base implements \Countable, \ArrayAccess, \IteratorAggregate, Comparable
 {
 	/**
 	 * This stores the actual scalar string that this object represents.
@@ -321,4 +323,30 @@ class Base implements \Countable, \ArrayAccess, \IteratorAggregate
 		// Str is immutable, cannot directly unset char
 		throw new \Exception('Str object is immutable, cannot unset char');
 	}
+
+	/**
+     * Implements Icecave\Parity\SubClassComparableInterface compare method.
+     *
+     * @see https://git.io/vVxSz
+     *
+     * @param  object  $value The object to compare.
+     *
+     * @return integer        The result of the comparison.
+     */
+    public function compare($value)
+    {
+        return strcmp((string)$value, (string)$this);
+    }
+
+    /**
+     * Returns a value indicating whether this instance is equal to another.
+     *
+     * @param  object  $value  The object to compare.
+     * 
+     * @return boolean
+     */
+    public function equals($value)
+    {
+        return Parity::isEqualTo($this, $value);
+    }
 }
