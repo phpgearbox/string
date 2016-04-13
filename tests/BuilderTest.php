@@ -80,7 +80,15 @@ class BuilderTest extends PHPUnit_Framework_TestCase
         $builder3 = new Builder('bar');
 
         $this->assertEquals(0, $builder1->compare($builder2));
-        $this->assertEquals(-4, $builder1->compare($builder3));
+
+        if (defined('HHVM_VERSION'))
+        {
+            $this->assertEquals(-1, $builder1->compare($builder3));
+        }
+        else
+        {
+            $this->assertEquals(-4, $builder1->compare($builder3));
+        }
     }
 
     public function testEquals()

@@ -132,7 +132,15 @@ class BaseStrTest extends PHPUnit_Framework_TestCase
     public function testCompare()
     {
         $this->assertEquals(0, Str::s('foo')->compare(Str::s('foo')));
-        $this->assertEquals(-4, Str::s('foo')->compare(Str::s('bar')));
+
+        if (defined('HHVM_VERSION'))
+        {
+            $this->assertEquals(-1, Str::s('foo')->compare(Str::s('bar')));
+        }
+        else
+        {
+            $this->assertEquals(-4, Str::s('foo')->compare(Str::s('bar')));
+        }
     }
 
     public function testEquals()
