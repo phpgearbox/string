@@ -4,7 +4,7 @@ The String Gear
 [![Latest Stable Version](https://poser.pugx.org/gears/string/v/stable.svg)](https://packagist.org/packages/gears/string)
 [![Total Downloads](https://poser.pugx.org/gears/string/downloads.svg)](https://packagist.org/packages/gears/string)
 [![License](https://poser.pugx.org/gears/string/license.svg)](https://packagist.org/packages/gears/string)
-[![HHVM Tested](http://hhvm.h4cc.de/badge/phpgearbox/string.svg?style=flat)](http://hhvm.h4cc.de/package/phpgearbox/string)
+[![HHVM Tested](http://hhvm.h4cc.de/badge/gears/string.svg?style=flat)](http://hhvm.h4cc.de/package/gears/string)
 
 An object oriented way to work with strings in PHP,
 with multibyte support baked in.
