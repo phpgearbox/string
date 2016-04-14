@@ -18,18 +18,18 @@ class RegexTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider matchesPatternProvider()
+     * @dataProvider regexMatchProvider()
      */
-    public function testMatchesPattern($expected, $string, $pattern, $options = '', $encoding = null)
+    public function testRegexMatch($expected, $string, $pattern, $options = '', $encoding = null)
     {
         $str = new Str($string, $encoding);
-        $result = $str->matchesPattern($pattern, $options);
+        $result = $str->regexMatch($pattern, $options);
         $this->assertInternalType('boolean', $result);
         $this->assertEquals($expected, $result);
         $this->assertEquals($string, $str);
     }
 
-    public function matchesPatternProvider()
+    public function regexMatchProvider()
     {
         return
         [

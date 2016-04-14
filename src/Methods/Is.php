@@ -22,7 +22,7 @@ trait Is
 	 */
 	public function isLowerCase()
 	{
-		return $this->matchesPattern('^[[:lower:]]*$');
+		return $this->regexMatch('^[[:lower:]]*$');
 	}
 
     /**
@@ -32,7 +32,7 @@ trait Is
 	 */
 	public function isUpperCase()
 	{
-		return $this->matchesPattern('^[[:upper:]]*$');
+		return $this->regexMatch('^[[:upper:]]*$');
 	}
 
     /**
@@ -43,7 +43,7 @@ trait Is
 	 */
 	public function isAlpha()
 	{
-		return $this->matchesPattern('^[[:alpha:]]*$');
+		return $this->regexMatch('^[[:alpha:]]*$');
 	}
 
     /**
@@ -54,7 +54,7 @@ trait Is
 	 */
 	public function isAlphanumeric()
 	{
-		return $this->matchesPattern('^[[:alnum:]]*$');
+		return $this->regexMatch('^[[:alnum:]]*$');
 	}
 
 	/**
@@ -65,7 +65,7 @@ trait Is
 	 */
 	public function isBlank()
 	{
-		return $this->matchesPattern('^[[:space:]]*$');
+		return $this->regexMatch('^[[:space:]]*$');
 	}
 
 	/**
@@ -76,7 +76,7 @@ trait Is
 	 */
 	public function isHexadecimal()
 	{
-		return $this->matchesPattern('^[[:xdigit:]]*$');
+		return $this->regexMatch('^[[:xdigit:]]*$');
 	}
 
 	/**

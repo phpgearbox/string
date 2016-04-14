@@ -22,7 +22,7 @@ trait Has
 	 */
 	public function hasLowerCase()
 	{
-		return $this->matchesPattern('.*[[:lower:]]');
+		return $this->regexMatch('.*[[:lower:]]');
 	}
 
 	/**
@@ -32,6 +32,6 @@ trait Has
 	 */
 	public function hasUpperCase()
 	{
-		return $this->matchesPattern('.*[[:upper:]]');
+		return $this->regexMatch('.*[[:upper:]]');
 	}
 }

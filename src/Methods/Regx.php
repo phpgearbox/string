@@ -50,7 +50,7 @@ trait Regx
 	 *
 	 * @throws PcreException   When PCRE Error occurs.
 	 */
-	public function matchesPattern($pattern, $options = '')
+	public function regexMatch($pattern, $options = '')
 	{
 		// Ensure the options contain the "u" modifier.
 		if (!$this->newSelf($options)->contains('u')) $options .= 'u';
