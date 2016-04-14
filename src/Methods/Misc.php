@@ -16,6 +16,21 @@ use voku\helper\UTF8;
 trait Misc
 {
     /**
+     * Normalise all line endings in string to `$newLineEnding`.
+     *
+     * @see http://stackoverflow.com/questions/7836632
+     *
+     * @param  string $newLineEnding Defaults to a LINE FEED. You may provide
+     *                               any string to replace all line endings.
+     *
+     * @return static
+     */
+    public function normaliseLineEndings($newLineEnding = "\n")
+    {
+        return $this->regexReplace('\R', $newLineEnding);
+    }
+    
+    /**
      * Returns a lowercase and trimmed string separated by the given delimiter.
      *
      * Delimiters are inserted before uppercase characters (with the exception

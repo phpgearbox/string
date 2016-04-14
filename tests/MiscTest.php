@@ -5,6 +5,27 @@ use Gears\String\Str;
 class MiscTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * @dataProvider normaliseLineEndingsProvider()
+     */
+    public function testNormaliseLineEndings($expected, $string, $newLineEnding = "\n", $encoding = null)
+    {
+        $str = new Str($string, $encoding);
+        $result = $str->normaliseLineEndings($newLineEnding);
+        $this->assertInstanceOf('Gears\\String\\Str', $result);
+        $this->assertEquals($expected, $result);
+        $this->assertEquals($string, $str);
+    }
+
+    public function normaliseLineEndingsProvider()
+    {
+        return
+        [
+            ["foo\nbar", "foo\r\nbar"],
+            ["foo\nbar", "foo\rbar"]
+        ];
+    }
+
+    /**
      * @dataProvider delimitProvider()
      */
     public function testDelimit($expected, $string, $delimiter, $encoding = null)
