@@ -74,6 +74,47 @@ trait Regx
 	}
 
 	/**
+	 * Given an expression with capture groups, this will return those captures.
+	 *
+	 * Basically this is the same as `regexMatch()` but returns the array
+	 * of matches from `preg_match()` where as `regexMatch()` just returns
+	 * a boolean result.
+	 *
+	 * @param  string $pattern Regex pattern to match against.
+	 *
+	 * @param  string $options Matching conditions to be used.
+	 *
+	 * @return array           The matches discovered by `preg_match()`.
+	 *
+	 * @throws PcreException   When PCRE Error occurs.
+	 */
+	public function regexExtract($pattern, $options = '')
+	{
+		// Define the array that will be filled by preg_match().
+		$matches = [];
+
+		// Ensure the options contain the "u" modifier.
+		if (!$this->newSelf($options)->contains('u')) $options .= 'u';
+
+		// Build the expression
+		$expression =
+			$this->regexDelimiter.
+			$pattern.
+			$this->regexDelimiter.
+			$options
+		;
+
+		// Run the expression
+		$result = preg_match($expression, $this->scalarString, $matches);
+
+		// If no errors return the $matches array
+		if ($result !== false) return $this->newSelfs($matches);
+
+		// Otherwise throw with last known PCRE Error.
+        throw new PcreException();
+	}
+
+	/**
 	 * Replaces all occurrences of $pattern in $str by $replacement.
 	 *
 	 * @param  string $pattern     The regular expression pattern.

@@ -41,6 +41,27 @@ class RegexTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider regexExtractProvider()
+     */
+    public function testRegexExtract($expected, $string, $pattern, $options = '', $encoding = null)
+    {
+        $str = new Str($string, $encoding);
+        $result = $str->regexExtract($pattern, $options);
+        $this->assertInternalType('array', $result);
+        $this->assertEquals($expected, $result);
+        $this->assertEquals($string, $str);
+    }
+
+    public function regexExtractProvider()
+    {
+        return
+        [
+            [[new Str('Gears\\String\\Str'), new Str('String')], 'Gears\\String\\Str', 'Gears\\\(.*)\\\Str'],
+            [[new Str('Gears\\String\\Str'), new Str('String'), 'foo' => new Str('String')], 'Gears\\String\\Str', 'Gears\\\(?<foo>.*)\\\Str']
+        ];
+    }
+
+    /**
      * @dataProvider regexReplaceProvider()
      */
     public function testRegexReplace($expected, $string, $pattern, $replacement, $options = 'msr', $encoding = null)
