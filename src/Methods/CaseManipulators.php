@@ -16,46 +16,46 @@ use voku\helper\UTF8;
 trait CaseManipulators
 {
     /**
-	 * Converts the first character of the string to lower case.
-	 *
-	 * @return static String with the first character of $str being lower case
-	 */
-	public function lowerCaseFirst()
-	{
-		$first = UTF8::substr($this->scalarString, 0, 1, $this->encoding);
+     * Converts the first character of the string to lower case.
+     *
+     * @return static String with the first character of $str being lower case
+     */
+    public function lowerCaseFirst()
+    {
+        $first = UTF8::substr($this->scalarString, 0, 1, $this->encoding);
 
-		$rest = UTF8::substr
-		(
-			$this->scalarString,
-			1,
-			$this->getLength() - 1,
-			$this->encoding
-		);
+        $rest = UTF8::substr
+        (
+            $this->scalarString,
+            1,
+            $this->getLength() - 1,
+            $this->encoding
+        );
 
-		return $this->newSelf(UTF8::strtolower($first, $this->encoding).$rest);
-	}
+        return $this->newSelf(UTF8::strtolower($first, $this->encoding).$rest);
+    }
 
-	/**
-	 * Converts the first character of the supplied string to upper case.
-	 *
-	 * @return static String with the first character of $str being upper case
-	 */
-	public function upperCaseFirst()
-	{
-		$first = UTF8::substr($this->scalarString, 0, 1, $this->encoding);
+    /**
+     * Converts the first character of the supplied string to upper case.
+     *
+     * @return static String with the first character of $str being upper case
+     */
+    public function upperCaseFirst()
+    {
+        $first = UTF8::substr($this->scalarString, 0, 1, $this->encoding);
 
-		$rest = UTF8::substr
-		(
-			$this->scalarString,
-			1,
-			$this->getLength() - 1,
-			$this->encoding
-		);
+        $rest = UTF8::substr
+        (
+            $this->scalarString,
+            1,
+            $this->getLength() - 1,
+            $this->encoding
+        );
 
-		return $this->newSelf(UTF8::strtoupper($first, $this->encoding).$rest);
-	}
+        return $this->newSelf(UTF8::strtoupper($first, $this->encoding).$rest);
+    }
 
-	/**
+    /**
      * Returns a case swapped version of the string.
      *
      * @return Stringy Object whose $str has each character's case swapped

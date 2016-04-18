@@ -29,7 +29,7 @@ trait Misc
     {
         return $this->regexReplace('\R', $newLineEnding);
     }
-    
+
     /**
      * Returns a lowercase and trimmed string separated by the given delimiter.
      *

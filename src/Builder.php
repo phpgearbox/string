@@ -78,12 +78,12 @@ class Builder implements Comparable
     }
 
     /**
-	 * Magic method to automatically turn the builder back into a scalar string.
-	 *
-	 * @see http://php.net/manual/en/language.oop5.magic.php#object.tostring
-	 *
-	 * @return string
-	 */
+     * Magic method to automatically turn the builder back into a scalar string.
+     *
+     * @see http://php.net/manual/en/language.oop5.magic.php#object.tostring
+     *
+     * @return string
+     */
     public function __toString()
     {
         return (string)$this->str;

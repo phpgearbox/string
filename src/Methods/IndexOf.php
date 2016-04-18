@@ -16,49 +16,49 @@ use voku\helper\UTF8;
 trait IndexOf
 {
     /**
-	 * Returns the index of the first occurrence of $needle in the string,
-	 * and false if not found. Accepts an optional offset from which to begin
-	 * the search.
-	 *
-	 * @param  string   $needle Substring to look for.
-	 *
-	 * @param  int      $offset Offset from which to search.
-	 *
-	 * @return int|bool         The occurrence's index if found,
-	 *                          otherwise false.
-	 */
-	public function indexOf($needle, $offset = 0)
-	{
-		return UTF8::strpos
-		(
-			$this->scalarString,
-			(string)$needle,
-			(int)$offset,
-			$this->encoding
-		);
-	}
+     * Returns the index of the first occurrence of $needle in the string,
+     * and false if not found. Accepts an optional offset from which to begin
+     * the search.
+     *
+     * @param  string   $needle Substring to look for.
+     *
+     * @param  int      $offset Offset from which to search.
+     *
+     * @return int|bool         The occurrence's index if found,
+     *                          otherwise false.
+     */
+    public function indexOf($needle, $offset = 0)
+    {
+        return UTF8::strpos
+        (
+            $this->scalarString,
+            (string)$needle,
+            (int)$offset,
+            $this->encoding
+        );
+    }
 
-	/**
-	 * Returns the index of the last occurrence of $needle in the string,
-	 * and false if not found. Accepts an optional offset from which to begin
-	 * the search. Offsets may be negative to count from the last character
-	 * in the string.
-	 *
-	 * @param  string   $needle Substring to look for.
-	 *
-	 * @param  int      $offset Offset from which to search.
-	 *
-	 * @return int|bool         The last occurrence's index if found,
-	 *                          otherwise false.
-	 */
-	public function indexOfLast($needle, $offset = 0)
-	{
-		return UTF8::strrpos
-		(
-			$this->scalarString,
-			(string)$needle,
-			(int)$offset,
-			$this->encoding
-		);
-	}
+    /**
+     * Returns the index of the last occurrence of $needle in the string,
+     * and false if not found. Accepts an optional offset from which to begin
+     * the search. Offsets may be negative to count from the last character
+     * in the string.
+     *
+     * @param  string   $needle Substring to look for.
+     *
+     * @param  int      $offset Offset from which to search.
+     *
+     * @return int|bool         The last occurrence's index if found,
+     *                          otherwise false.
+     */
+    public function indexOfLast($needle, $offset = 0)
+    {
+        return UTF8::strrpos
+        (
+            $this->scalarString,
+            (string)$needle,
+            (int)$offset,
+            $this->encoding
+        );
+    }
 }

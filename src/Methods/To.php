@@ -15,27 +15,27 @@ use voku\helper\UTF8;
 
 trait To
 {
-	/**
-	 * Explicitly turn Str back into a scalar string.
-	 *
-	 * @return string
-	 */
-	public function toString()
-	{
-		return $this->__toString();
-	}
+    /**
+     * Explicitly turn Str back into a scalar string.
+     *
+     * @return string
+     */
+    public function toString()
+    {
+        return $this->__toString();
+    }
 
     /**
-	 * Converts the string to an array of characters.
-	 *
-	 * Each character is an instance of Str.
-	 *
-	 * @return static[]
-	 */
-	public function toArray()
-	{
-		return $this->getIterator()->getArrayCopy();
-	}
+     * Converts the string to an array of characters.
+     *
+     * Each character is an instance of Str.
+     *
+     * @return static[]
+     */
+    public function toArray()
+    {
+        return $this->getIterator()->getArrayCopy();
+    }
 
     /**
      * Converts all characters in the string to lowercase.
@@ -72,19 +72,19 @@ trait To
      */
     public function toSingular($language = 'en')
     {
-		if (!class_exists('\\ICanBoogie\\Inflector'))
-		{
-			throw new \RuntimeException
-			(
-				"This method requires ICanBoogie\Inflector. ".
-				"Install with: composer require icanboogie/inflector"
-			);
-		}
+        if (!class_exists('\\ICanBoogie\\Inflector'))
+        {
+            throw new \RuntimeException
+            (
+                "This method requires ICanBoogie\Inflector. ".
+                "Install with: composer require icanboogie/inflector"
+            );
+        }
 
         return $this->newSelf
         (
             \ICanBoogie\Inflector::get($language)
-			->singularize($this->scalarString)
+            ->singularize($this->scalarString)
         );
     }
 
@@ -97,19 +97,19 @@ trait To
      */
     public function toPlural($language = 'en')
     {
-		if (!class_exists('\\ICanBoogie\\Inflector'))
-		{
-			throw new \RuntimeException
-			(
-				"This method requires ICanBoogie\Inflector. ".
-				"Install with: composer require icanboogie/inflector"
-			);
-		}
+        if (!class_exists('\\ICanBoogie\\Inflector'))
+        {
+            throw new \RuntimeException
+            (
+                "This method requires ICanBoogie\Inflector. ".
+                "Install with: composer require icanboogie/inflector"
+            );
+        }
 
         return $this->newSelf
         (
             \ICanBoogie\Inflector::get($language)
-			->pluralize($this->scalarString)
+            ->pluralize($this->scalarString)
         );
     }
 
@@ -395,7 +395,7 @@ trait To
         return $this->trim()->toLowerCase()->upperCaseFirst();
     }
 
-	/**
+    /**
      * Converts the string into an URL slug.
      *
      * This includes replacing non-ASCII characters with their closest ASCII
@@ -413,24 +413,24 @@ trait To
      */
     public function toSlugCase($replacement = '-', $language = 'en', $strToLower = true)
     {
-		if (!class_exists('\\voku\\helper\\URLify'))
-		{
-			throw new \RuntimeException
-			(
-				"This method requires \voku\helper\URLify. ".
-				"Install with: composer require voku/urlify"
-			);
-		}
+        if (!class_exists('\\voku\\helper\\URLify'))
+        {
+            throw new \RuntimeException
+            (
+                "This method requires \voku\helper\URLify. ".
+                "Install with: composer require voku/urlify"
+            );
+        }
 
         return $this->newSelf
         (
             \voku\helper\URLify::slug
-			(
-				$this->scalarString,
-				$language,
-				$replacement,
-				$strToLower
-			)
+            (
+                $this->scalarString,
+                $language,
+                $replacement,
+                $strToLower
+            )
         );
     }
 }

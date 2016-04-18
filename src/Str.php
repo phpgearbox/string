@@ -27,23 +27,23 @@
  */
 class Str extends Base
 {
-	use Methods\To;
-	use Methods\Is;
-	use Methods\Pad;
-	use Methods\Has;
-	use Methods\Misc;
-	use Methods\Html;
-	use Methods\Regx;
-	use Methods\Trim;
-	use Methods\Remove;
-	use Methods\Ensure;
-	use Methods\Between;
-	use Methods\IndexOf;
-	use Methods\Replace;
-	use Methods\Truncate;
-	use Methods\Contains;
-	use Methods\FirstLast;
-	use Methods\StartEndWith;
-	use Methods\LongestCommon;
-	use Methods\CaseManipulators;
+    use Methods\To;
+    use Methods\Is;
+    use Methods\Pad;
+    use Methods\Has;
+    use Methods\Misc;
+    use Methods\Html;
+    use Methods\Regx;
+    use Methods\Trim;
+    use Methods\Remove;
+    use Methods\Ensure;
+    use Methods\Between;
+    use Methods\IndexOf;
+    use Methods\Replace;
+    use Methods\Truncate;
+    use Methods\Contains;
+    use Methods\FirstLast;
+    use Methods\StartEndWith;
+    use Methods\LongestCommon;
+    use Methods\CaseManipulators;
 }

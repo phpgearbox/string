@@ -19,14 +19,14 @@ require_once(__DIR__.'/vendor/autoload.php');
 
 class RoboFile extends Robo\Tasks
 {
-	public function test()
-	{
-		exit
-		(
-			$this->taskPHPUnit()
-			->arg('./tests')
-			->option('coverage-clover', './build/logs/clover.xml')
-			->run()->getExitCode()
-		);
-	}
+    public function test()
+    {
+        exit
+        (
+            $this->taskPHPUnit()
+            ->arg('./tests')
+            ->option('coverage-clover', './build/logs/clover.xml')
+            ->run()->getExitCode()
+        );
+    }
 }

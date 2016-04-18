@@ -16,22 +16,22 @@ use voku\helper\UTF8;
 trait Has
 {
     /**
-	 * Does the string have at least one lower case character?
-	 *
-	 * @return bool Whether or not the string contains a lower case character.
-	 */
-	public function hasLowerCase()
-	{
-		return $this->regexMatch('.*[[:lower:]]');
-	}
+     * Does the string have at least one lower case character?
+     *
+     * @return bool Whether or not the string contains a lower case character.
+     */
+    public function hasLowerCase()
+    {
+        return $this->regexMatch('.*[[:lower:]]');
+    }
 
-	/**
-	 * Does the string have at least one upper case character?
-	 *
-	 * @return bool Whether or not the string contains an upper case character.
-	 */
-	public function hasUpperCase()
-	{
-		return $this->regexMatch('.*[[:upper:]]');
-	}
+    /**
+     * Does the string have at least one upper case character?
+     *
+     * @return bool Whether or not the string contains an upper case character.
+     */
+    public function hasUpperCase()
+    {
+        return $this->regexMatch('.*[[:upper:]]');
+    }
 }

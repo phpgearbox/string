@@ -16,55 +16,55 @@ use voku\helper\UTF8;
 trait Html
 {
     /**
-	 * Convert all HTML entities to their applicable characters.
-	 *
-	 * @see http://php.net/manual/en/function.html-entity-decode.php
-	 *
-	 * @param  int|null $flags Optional flags
-	 *
-	 * @return static          String after being html decoded.
-	 */
-	public function htmlDecode($flags = ENT_COMPAT)
-	{
-		return $this->newSelf
-		(
-			UTF8::html_entity_decode
-			(
-				$this->scalarString,
-				$flags,
-				$this->encoding
-			)
-		);
-	}
+     * Convert all HTML entities to their applicable characters.
+     *
+     * @see http://php.net/manual/en/function.html-entity-decode.php
+     *
+     * @param  int|null $flags Optional flags
+     *
+     * @return static          String after being html decoded.
+     */
+    public function htmlDecode($flags = ENT_COMPAT)
+    {
+        return $this->newSelf
+        (
+            UTF8::html_entity_decode
+            (
+                $this->scalarString,
+                $flags,
+                $this->encoding
+            )
+        );
+    }
 
-	/**
-	 * Convert all applicable characters to HTML entities.
-	 *
-	 * @see http://php.net/manual/en/function.htmlentities.php
-	 *
-	 * @param  int|null $flags        Optional flags.
-	 *
-	 * @param  bool     $doubleEncode When double_encode is turned off PHP
-	 *                                will not encode existing html entities.
-	 *                                The default is to convert everything.
-	 *
-	 * @return static                 String after being html encoded.
-	 */
-	public function htmlEncode($flags = null, $doubleEncode = true)
-	{
-		if ($flags === null) $flags = ENT_QUOTES | ENT_SUBSTITUTE;
+    /**
+     * Convert all applicable characters to HTML entities.
+     *
+     * @see http://php.net/manual/en/function.htmlentities.php
+     *
+     * @param  int|null $flags        Optional flags.
+     *
+     * @param  bool     $doubleEncode When double_encode is turned off PHP
+     *                                will not encode existing html entities.
+     *                                The default is to convert everything.
+     *
+     * @return static                 String after being html encoded.
+     */
+    public function htmlEncode($flags = null, $doubleEncode = true)
+    {
+        if ($flags === null) $flags = ENT_QUOTES | ENT_SUBSTITUTE;
 
-		return $this->newSelf
-		(
-			UTF8::htmlentities
-			(
-				$this->scalarString,
-				$flags,
-				$this->encoding,
-				$doubleEncode
-			)
-		);
-	}
+        return $this->newSelf
+        (
+            UTF8::htmlentities
+            (
+                $this->scalarString,
+                $flags,
+                $this->encoding,
+                $doubleEncode
+            )
+        );
+    }
 
     /**
      * Sanitizes data so that Cross Site Scripting Hacks can be prevented.
@@ -87,25 +87,25 @@ trait Html
      */
     public function htmlXssClean()
     {
-		static $antiXss = null;
+        static $antiXss = null;
 
-		if ($antiXss === null)
-		{
-			if (class_exists('\\voku\\helper\\AntiXSS'))
-			{
-				$antiXss = new \voku\helper\AntiXSS();
-			}
-			else
-			{
-				throw new \RuntimeException
-				(
-					"This method requires \voku\helper\AntiXSS. ".
-					"Install with: composer require voku/anti-xss"
-				);
-			}
-		}
+        if ($antiXss === null)
+        {
+            if (class_exists('\\voku\\helper\\AntiXSS'))
+            {
+                $antiXss = new \voku\helper\AntiXSS();
+            }
+            else
+            {
+                throw new \RuntimeException
+                (
+                    "This method requires \voku\helper\AntiXSS. ".
+                    "Install with: composer require voku/anti-xss"
+                );
+            }
+        }
 
-		return $this->newSelf($antiXss->xss_clean($this->scalarString));
+        return $this->newSelf($antiXss->xss_clean($this->scalarString));
     }
 
     /**
@@ -122,9 +122,9 @@ trait Html
      */
     public function htmlStripTags($allowableTags = null)
     {
-		return $this->newSelf
-		(
-			UTF8::strip_tags($this->scalarString, $allowableTags)
-		);
+        return $this->newSelf
+        (
+            UTF8::strip_tags($this->scalarString, $allowableTags)
+        );
     }
 }
