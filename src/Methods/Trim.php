@@ -22,7 +22,7 @@ trait Trim
      * Accepts an optional string of characters to
      * strip instead of the defaults.
      *
-     * @param  string $chars Optional string of characters to strip
+     * @param  string|null $chars Optional string of characters to strip.
      *
      * @return static
      */
@@ -38,7 +38,7 @@ trait Trim
      * Supports the removal of unicode whitespace. Accepts an optional
      * string of characters to strip instead of the defaults.
      *
-     * @param  string $chars Optional string of characters to strip.
+     * @param  string|null $chars Optional string of characters to strip.
      *
      * @return static
      */
@@ -52,7 +52,7 @@ trait Trim
      * Supports the removal of unicode whitespace. Accepts an optional
      * string of characters to strip instead of the defaults.
      *
-     * @param  string $chars Optional string of characters to strip
+     * @param  string|null $chars Optional string of characters to strip.
      *
      * @return static
      */

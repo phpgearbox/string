@@ -114,9 +114,9 @@ trait Html
      * This function tries to return a string with all NULL bytes,
      * HTML and PHP tags stripped from a given str.
      *
-     * @param  string  $allowableTags You can use the optional second parameter
-     *                                to specify tags which should not be
-     *                                stripped.
+     * @param  string|null  $allowableTags You can use the optional second
+     *                                     parameter to specify tags which
+     *                                     should not be stripped.
      *
      * @return static
      */

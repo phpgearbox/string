@@ -57,11 +57,12 @@ class Builder implements Comparable
     /**
      * String Builder Constructor.
      *
-     * @param string|Str $string   Optionally provide an intial string.
+     * @param string|Str  $string   Optionally provide an intial string.
      *
-     * @param string     $encoding The character encoding to use for this string
-     *                             builder. If not specified, defaults to the
-     *                             value returned from mb_internal_encoding().
+     * @param string|null $encoding The character encoding to use for this
+     *                              string builder. If not specified, defaults
+     *                              to the value returned from
+     *                              mb_internal_encoding().
      */
     public function __construct($string = '', $encoding = null)
     {

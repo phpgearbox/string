@@ -358,7 +358,7 @@ trait To
      * Also accepts an array, $ignore, allowing you to
      * list words not to be capitalized.
      *
-     * @param  array $ignore An array of words not to capitalize
+     * @param  array|null $ignore An array of words not to capitalize
      *
      * @return static
      */

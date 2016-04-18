@@ -159,7 +159,7 @@ trait Regx
      *
      * @param  string   $pattern The regex with which to split the string.
      *
-     * @param  int      $limit   Optional maximum number of results to return.
+     * @param  int|null $limit   Optional maximum number of results to return.
      *
      * @param  bool     $quote   By default this method will run the provided
      *                           $pattern through preg_quote(), this allows the

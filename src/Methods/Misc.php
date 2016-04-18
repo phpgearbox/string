@@ -138,11 +138,11 @@ trait Misc
      * the remaining string. If $end is negative, it is computed from the end
      * of the string.
      *
-     * @param  int    $start Initial index from which to begin extraction.
+     * @param  int      $start Initial index from which to begin extraction.
      *
-     * @param  int    $end   Optional index at which to end extraction.
+     * @param  int|null $end   Optional index at which to end extraction.
      *
-     * @return static        The extracted substring.
+     * @return static          The extracted substring.
      */
     public function slice($start, $end = null)
     {
