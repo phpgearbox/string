@@ -21,6 +21,12 @@ class RoboFile extends Robo\Tasks
 {
 	public function test()
 	{
-		exit($this->taskPHPUnit()->arg('./tests')->run()->getExitCode());
+		exit
+		(
+			$this->taskPHPUnit()
+			->arg('./tests')
+			->option('coverage-clover', './build/logs/clover.xml')
+			->run()->getExitCode()
+		);
 	}
 }
