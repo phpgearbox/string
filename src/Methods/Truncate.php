@@ -76,15 +76,7 @@ trait Truncate
         {
             // Find pos of the last occurrence of a space, get up to that
             $lastPos = UTF8::strrpos($truncated, ' ', 0, $this->encoding);
-
-            if (!is_integer($lastPos))
-            {
-                throw new \UnexpectedValueException
-                (
-                    'Expecting $lastPos to be integer!'
-                );
-            }
-
+            if (!is_integer($lastPos)) $lastPos = 0;
             $truncated = UTF8::substr($truncated, 0, $lastPos, $this->encoding);
         }
 
