@@ -162,7 +162,7 @@ class Base implements \Countable, \ArrayAccess, \IteratorAggregate, Comparable
      */
     public static function s($string = '', $encoding = null)
     {
-        return new static($string);
+        return new static($string, $encoding);
     }
 
     /**
