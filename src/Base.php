@@ -77,12 +77,12 @@ class Base implements \Countable, \ArrayAccess, \IteratorAggregate, Comparable
     /**
      * Initialises a Str object.
      *
-     * @param mixed  $string             Must be a scalar string or an object
+     * @param mixed       $string        Must be a scalar string or an object
      *                                   that implements the __toString() method
      *                                   or a value that is castable to a scalar
      *                                   string.
      *
-     * @param string $encoding           The character encoding to use for this
+     * @param string|null $encoding      The character encoding to use for this
      *                                   string. If not specified, defaults to
      *                                   the value returned from
      *                                   mb_internal_encoding().
@@ -144,12 +144,12 @@ class Base implements \Countable, \ArrayAccess, \IteratorAggregate, Comparable
     /**
      * Factory method to create a new Gears\String\Str object.
      *
-     * @param mixed  $string             Must be a scalar string or an object
+     * @param mixed       $string        Must be a scalar string or an object
      *                                   that implements the __toString() method
      *                                   or a value that is castable to a scalar
      *                                   string.
      *
-     * @param string $encoding           The character encoding to use for this
+     * @param string|null $encoding      The character encoding to use for this
      *                                   string. If not specified, defaults to
      *                                   the value returned from
      *                                   mb_internal_encoding().
@@ -172,6 +172,7 @@ class Base implements \Countable, \ArrayAccess, \IteratorAggregate, Comparable
      * the current encoding to the next Str object we are creating.
      *
      * @param  string $string
+     *
      * @return static
      */
     protected function newSelf($string)
@@ -186,7 +187,8 @@ class Base implements \Countable, \ArrayAccess, \IteratorAggregate, Comparable
      *
      * > NOTE: This method is recursive.
      *
-     * @param  array $input
+     * @param  array    $input
+     *
      * @return static[]
      */
     protected function newSelfs(array $input)
@@ -252,7 +254,8 @@ class Base implements \Countable, \ArrayAccess, \IteratorAggregate, Comparable
      * Implements part of the ArrayAccess interface. Offsets may be
      * negative to count from the last character in the string.
      *
-     * @param int $index The integer of the index to check.
+     * @param  int     $index The integer of the index to check.
+     *
      * @return boolean
      */
     public function offsetExists($index)
@@ -270,11 +273,12 @@ class Base implements \Countable, \ArrayAccess, \IteratorAggregate, Comparable
      * ArrayAccess interface, and throws an OutOfBoundsException if the index
      * does not exist.
      *
-     * @param  mixed $offset The index from which to retrieve the char
+     * @param  mixed  $offset        The index from which to retrieve the char.
      *
-     * @return string                 The character at the specified index
+     * @return static                The character at the specified index.
+     *
      * @throws \OutOfBoundsException If the positive or negative offset does
-     *                               not exist
+     *                               not exist.
      */
     public function offsetGet($offset)
     {
@@ -299,10 +303,11 @@ class Base implements \Countable, \ArrayAccess, \IteratorAggregate, Comparable
      * Implements part of the ArrayAccess interface, but throws an exception
      * when called. This maintains the immutability of Str objects.
      *
-     * @param  mixed $offset The index of the character
-     * @param  mixed $value  Value to set
+     * @param  mixed      $offset The index of the character.
      *
-     * @throws \Exception When called
+     * @param  mixed      $value  Value to set.
+     *
+     * @throws \Exception         When called.
      */
     public function offsetSet($offset, $value)
     {
@@ -314,9 +319,9 @@ class Base implements \Countable, \ArrayAccess, \IteratorAggregate, Comparable
      * Implements part of the ArrayAccess interface, but throws an exception
      * when called. This maintains the immutability of Str objects.
      *
-     * @param  mixed $offset The index of the character
+     * @param  mixed      $offset The index of the character.
      *
-     * @throws \Exception When called
+     * @throws \Exception         When called.
      */
     public function offsetUnset($offset)
     {
