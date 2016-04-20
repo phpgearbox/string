@@ -1,0 +1,40 @@
+title: phpGearBox - gears/string
+subTitle: An object oriented way to work with strings in PHP, with multibyte support baked in.
+
+template:
+    url: https://github.com/CouscousPHP/Template-Dark
+
+exclude:
+    - src
+    - tests
+    - vendor
+
+baseUrl: http://phpgearbox.github.io/string
+
+github:
+    user: phpgearbox
+    repo: string
+
+menu:
+    sections:
+        main:
+            name: Overview
+            items:
+                home:
+                    text: README
+                    relativeUrl: index.html
+                initialisation-options:
+                    text: Initialisation Options
+                    relativeUrl: docs/initialisation options.html
+                string-builder:
+                    text: The String Builder
+                    relativeUrl: docs/string builder.html
+        methods:
+            name: Methods
+            items:
+                between:
+                    text: between
+                    relativeUrl: docs/Methods/between.html
+                betweenAll:
+                    text: betweenAll
+                    relativeUrl: docs/Methods/betweenall.html

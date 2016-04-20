@@ -1,5 +1,5 @@
 # Description
-Returns an array of substrings between $start and $end.
+Returns an array of substrings between `$start` and `$end`.
 
 `array betweenAll(string $start, string $end)`
 
