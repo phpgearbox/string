@@ -81,7 +81,7 @@ class BuilderTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(0, $builder1->compare($builder2));
 
-        if (defined('HHVM_VERSION'))
+        if (defined('HHVM_VERSION') || strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
         {
             $this->assertEquals(-1, $builder1->compare($builder3));
         }

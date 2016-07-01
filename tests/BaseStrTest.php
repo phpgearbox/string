@@ -133,7 +133,7 @@ class BaseStrTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals(0, Str::s('foo')->compare(Str::s('foo')));
 
-        if (defined('HHVM_VERSION'))
+        if (defined('HHVM_VERSION') || strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
         {
             $this->assertEquals(-1, Str::s('foo')->compare(Str::s('bar')));
         }
