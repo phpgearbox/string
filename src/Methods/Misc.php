@@ -216,14 +216,12 @@ trait Misc
             return UTF8::substr_count
             (
                 $this->scalarString,
-                $substring,
-                $this->encoding
+                $substring
             );
         }
 
         $str = UTF8::strtoupper($this->scalarString, $this->encoding);
         $substring = UTF8::strtoupper($substring, $this->encoding);
-
-        return UTF8::substr_count($str, $substring, $this->encoding);
+        return UTF8::substr_count($str, $substring);
     }
 }
