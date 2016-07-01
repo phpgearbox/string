@@ -167,8 +167,8 @@ class ToTest extends PHPUnit_Framework_TestCase
             array('foo bar', 'fòô bàř'),
             array(' TEST ', ' ŤÉŚŢ '),
             array('ph = z = 3', 'φ = ź = 3'),
-            array('pierievirka', 'перевірка'),
-            array('lysaia ghora', 'лысая гора'),
+            array('perevirka', 'перевірка'),
+            array('lysaia gora', 'лысая гора'),
             array('shchuka', 'щука'),
             array('Han Zi ', '漢字'),
             array('xin chao the gioi', 'xin chào thế giới'),
@@ -179,7 +179,7 @@ class ToTest extends PHPUnit_Framework_TestCase
             array(' ', ' '), // narrow no-break space (U+202F)
             array(' ', ' '), // medium mathematical space (U+205F)
             array(' ', '　'), // ideographic space (U+3000)
-            array('', '𐍉'), // some uncommon, unsupported character (U+10349)
+            array('?', '𐍉'), // some uncommon, unsupported character (U+10349)
         );
     }
 
