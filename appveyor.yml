@@ -1,0 +1,13 @@
+clone_folder: c:\projects\gears\string
+
+install:
+  - cinst php
+  - php -r "copy('https://getcomposer.org/composer.phar', '%SystemRoot%\composer');"
+
+build_script:
+    - cd c:\projects\gears\string && composer install
+
+test_script:
+  - cd c:\projects\gears\string && .\vendor\bin\robo test
+
+deploy: off
