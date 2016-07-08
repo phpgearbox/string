@@ -16,11 +16,11 @@ install:
   - echo extension=php_openssl.dll >> php.ini
   - echo extension=php_mbstring.dll >> php.ini
   - echo extension=php_fileinfo.dll >> php.ini
-  - appveyor DownloadFile https://getcomposer.org/composer.phar -FileName composer
+  - appveyor DownloadFile https://getcomposer.org/composer.phar -FileName c:\tools\php\composer
 
 build_script:
     - cd c:\projects\gears\string
-    - c:\tools\php\composer install
+    - composer install
 
 test_script:
   - cd c:\projects\gears\string
