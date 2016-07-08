@@ -1,12 +1,13 @@
 clone_folder: c:\projects\gears\string
 
 install:
-  - ps: cinst php
-  - PATH
+  - cinst php
+  - set PATH=c:\tools\php;%PATH%
   - php -r "copy('c:\tools\php\php.ini-development', 'c:\tools\php\php.ini');"
-  - c:\tools\php\php.exe -r "file_put_contents('c:\tools\php\php.ini', str_replace('; extension_dir = "ext"', 'extension_dir = "c:\tools\php\ext"', file_get_contents('c:\tools\php\php.ini')));"
-  - c:\tools\php\php.exe -r "file_put_contents('c:\tools\php\php.ini', str_replace(';extension=php_openssl.dll', 'extension=php_openssl.dll', file_get_contents('c:\tools\php\php.ini')));"
-  - c:\tools\php\php.exe -r "copy('https://getcomposer.org/composer.phar', '%SystemRoot%\composer');"
+  - php -r "file_put_contents('c:\tools\php\php.ini', str_replace('; extension_dir = "ext"', 'extension_dir = "c:\tools\php\ext"', file_get_contents('c:\tools\php\php.ini')));"
+  - php -r "file_put_contents('c:\tools\php\php.ini', str_replace(';extension=php_openssl.dll', 'extension=c:\tools\php\ext\php_openssl.dll', file_get_contents('c:\tools\php\php.ini')));"
+  - php -r "echo file_get_contents('c:\tools\php\php.ini');"
+  - php -r "copy('https://getcomposer.org/composer.phar', 'c:\tools\php\composer');"
 
 build_script:
     - cd c:\projects\gears\string && composer install
