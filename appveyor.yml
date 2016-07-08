@@ -20,8 +20,7 @@ install:
 
 build_script:
     - cd c:\projects\gears\string
-    - PATH
-    - composer install
+    - c:\tools\php\composer install
 
 test_script:
   - cd c:\projects\gears\string
