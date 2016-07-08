@@ -1,8 +1,10 @@
 clone_folder: c:\projects\gears\string
 
 install:
-  - cinst php
-  - c:\tools\php\php.exe -r "copy('c:\tools\php\php.ini-development', 'c:\tools\php\php.ini');"
+  - ps: cinst php
+  - PATH
+  - php -r "copy('c:\tools\php\php.ini-development', 'c:\tools\php\php.ini');"
+  - c:\tools\php\php.exe -r "file_put_contents('c:\tools\php\php.ini', str_replace('; extension_dir = "ext"', 'extension_dir = "c:\tools\php\ext"', file_get_contents('c:\tools\php\php.ini')));"
   - c:\tools\php\php.exe -r "file_put_contents('c:\tools\php\php.ini', str_replace(';extension=php_openssl.dll', 'extension=php_openssl.dll', file_get_contents('c:\tools\php\php.ini')));"
   - c:\tools\php\php.exe -r "copy('https://getcomposer.org/composer.phar', '%SystemRoot%\composer');"
 
