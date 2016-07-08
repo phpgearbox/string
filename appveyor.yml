@@ -1,18 +1,29 @@
 clone_folder: c:\projects\gears\string
 
+init:
+    - SET PATH=C:\Program Files\OpenSSL;c:\tools\php;%PATH%
+    - SET COMPOSER_NO_INTERACTION=1
+    - SET PHP=1
+    - SET ANSICON=121x90 (121x90)
+
 install:
-  - cinst php
-  - set PATH=c:\tools\php;%PATH%
-  - php -r "copy('c:\tools\php\php.ini-development', 'c:\tools\php\php.ini');"
-  - php -r "file_put_contents('c:\tools\php\php.ini', str_replace('; extension_dir = "ext"', 'extension_dir = "c:\tools\php\ext"', file_get_contents('c:\tools\php\php.ini')));"
-  - php -r "file_put_contents('c:\tools\php\php.ini', str_replace(';extension=php_openssl.dll', 'extension=c:\tools\php\ext\php_openssl.dll', file_get_contents('c:\tools\php\php.ini')));"
-  - php -r "echo file_get_contents('c:\tools\php\php.ini');"
-  - php -r "copy('https://getcomposer.org/composer.phar', 'c:\tools\php\composer');"
+  - cinst -y OpenSSL.Light
+  - cinst -y php
+  - cd c:\tools\php
+  - copy php.ini-production php.ini /Y
+  - echo date.timezone="UTC" >> php.ini
+  - echo extension_dir=ext >> php.ini
+  - echo extension=php_openssl.dll >> php.ini
+  - echo extension=php_mbstring.dll >> php.ini
+  - echo extension=php_fileinfo.dll >> php.ini
+  - appveyor DownloadFile https://getcomposer.org/composer.phar -FileName composer
 
 build_script:
-    - cd c:\projects\gears\string && composer install
+    - cd c:\projects\gears\string
+    - composer install
 
 test_script:
-  - cd c:\projects\gears\string && .\vendor\bin\robo test
+  - cd c:\projects\gears\string
+  - vendor\bin\robo test
 
 deploy: off
