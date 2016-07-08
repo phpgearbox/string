@@ -20,6 +20,7 @@ install:
 
 build_script:
     - cd c:\projects\gears\string
+    - PATH
     - composer install
 
 test_script:
