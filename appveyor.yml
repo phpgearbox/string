@@ -3,6 +3,7 @@ clone_folder: c:\projects\gears\string
 init:
   - SET PATH=C:\Program Files\OpenSSL;c:\tools\php;%PATH%
   - SET COMPOSER_NO_INTERACTION=1
+  - SET ANSICON=121x90 (121x90)
 
 install:
   - cinst -y OpenSSL.Light
@@ -14,7 +15,7 @@ install:
   - echo extension=php_openssl.dll >> php.ini
   - echo extension=php_mbstring.dll >> php.ini
   - echo extension=php_fileinfo.dll >> php.ini
-  - echo @php "c:\tools\php\composer.phar" %* > composer.bat
+  - echo @php "c:\tools\php\composer.phar" %%* > composer.bat
   - ps: Get-Content composer.bat
   - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
   - php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('https://composer.github.io/installer.sig'))) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
