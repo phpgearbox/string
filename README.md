@@ -1,6 +1,7 @@
 The String Gear
 ================================================================================
 [![Build Status](https://travis-ci.org/phpgearbox/string.svg?branch=master)](https://travis-ci.org/phpgearbox/string)
+[![Windows Build Status](https://ci.appveyor.com/api/projects/status/8jj9wxuyfkaros1w?svg=true)](https://ci.appveyor.com/project/brad-jones/string)
 [![Latest Stable Version](https://poser.pugx.org/gears/string/v/stable.svg)](https://packagist.org/packages/gears/string)
 [![Total Downloads](https://poser.pugx.org/gears/string/downloads.svg)](https://packagist.org/packages/gears/string)
 [![License](https://poser.pugx.org/gears/string/license.svg)](https://packagist.org/packages/gears/string)
