@@ -1,14 +1,15 @@
 clone_folder: c:\projects\gears\string
 
 init:
-    - SET PATH=C:\Program Files\OpenSSL;c:\tools\php;%PATH%
-    - SET COMPOSER_NO_INTERACTION=1
-    - SET PHP=1
-    - SET ANSICON=121x90 (121x90)
+  - SET PATH=C:\Program Files\OpenSSL;c:\tools\php;%PATH%
+  - SET COMPOSER_NO_INTERACTION=1
+  - SET PHP=1
+  - SET ANSICON=121x90 (121x90)
 
 install:
   - cinst -y OpenSSL.Light
   - cinst -y php
+  - cinst -y composer
   - cd c:\tools\php
   - copy php.ini-production php.ini /Y
   - echo date.timezone="UTC" >> php.ini
@@ -16,11 +17,11 @@ install:
   - echo extension=php_openssl.dll >> php.ini
   - echo extension=php_mbstring.dll >> php.ini
   - echo extension=php_fileinfo.dll >> php.ini
-  - appveyor DownloadFile https://getcomposer.org/composer.phar -FileName c:\tools\php\composer
+  #- php -r "copy('https://getcomposer.org/composer.phar', 'composer');"
 
 build_script:
-    - cd c:\projects\gears\string
-    - composer install
+  - cd c:\projects\gears\string
+  - composer install
 
 test_script:
   - cd c:\projects\gears\string
