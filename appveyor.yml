@@ -15,12 +15,12 @@ install:
   - echo extension=php_openssl.dll >> php.ini
   - echo extension=php_mbstring.dll >> php.ini
   - echo extension=php_fileinfo.dll >> php.ini
-  - cmd: echo @php c:\tools\php\composer.phar %* > composer.bat
-  - ps: Get-Content composer.bat
   - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
   - php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('https://composer.github.io/installer.sig'))) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
   - php composer-setup.php
   - php -r "unlink('composer-setup.php');"
+  - php -r "file_put_contents('composer.bat', '@php c:\tools\php\composer.phar %*');"
+  - ps: Get-Content composer.bat
 
 build_script:
   - cd c:\projects\gears\string
