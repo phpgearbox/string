@@ -1,20 +1,15 @@
-title: phpGearBox - gears/string
-subTitle: An object oriented way to work with strings in PHP, with multibyte support baked in.
-
+title: 'phpGearBox - gears/string'
+subTitle: 'An object oriented way to work with strings in PHP, with multibyte support baked in.'
 template:
-    url: https://github.com/CouscousPHP/Template-Dark
-
+    url: 'https://github.com/CouscousPHP/Template-Dark'
 exclude:
     - src
     - tests
     - vendor
-
-baseUrl: http://phpgearbox.github.io/string
-
+baseUrl: 'http://phpgearbox.github.io/string'
 github:
     user: phpgearbox
     repo: string
-
 menu:
     sections:
         main:
@@ -24,17 +19,266 @@ menu:
                     text: README
                     relativeUrl: index.html
                 initialisation-options:
-                    text: Initialisation Options
-                    relativeUrl: docs/initialisation options.html
+                    text: 'Initialisation Options'
+                    relativeUrl: 'docs/initialisation options.html'
                 string-builder:
-                    text: The String Builder
-                    relativeUrl: docs/string builder.html
+                    text: 'The String Builder'
+                    relativeUrl: 'docs/string builder.html'
         methods:
             name: Methods
             items:
+                toString:
+                    text: toString
+                    relativeUrl: docs/Methods/tostring.html
+                toArray:
+                    text: toArray
+                    relativeUrl: docs/Methods/toarray.html
+                toLowerCase:
+                    text: toLowerCase
+                    relativeUrl: docs/Methods/tolowercase.html
+                toUpperCase:
+                    text: toUpperCase
+                    relativeUrl: docs/Methods/touppercase.html
+                toSingular:
+                    text: toSingular
+                    relativeUrl: docs/Methods/tosingular.html
+                toPlural:
+                    text: toPlural
+                    relativeUrl: docs/Methods/toplural.html
+                toAscii:
+                    text: toAscii
+                    relativeUrl: docs/Methods/toascii.html
+                toBoolean:
+                    text: toBoolean
+                    relativeUrl: docs/Methods/toboolean.html
+                toSpaces:
+                    text: toSpaces
+                    relativeUrl: docs/Methods/tospaces.html
+                toTabs:
+                    text: toTabs
+                    relativeUrl: docs/Methods/totabs.html
+                toDashed:
+                    text: toDashed
+                    relativeUrl: docs/Methods/todashed.html
+                toUnderScored:
+                    text: toUnderScored
+                    relativeUrl: docs/Methods/tounderscored.html
+                toCamelCase:
+                    text: toCamelCase
+                    relativeUrl: docs/Methods/tocamelcase.html
+                toSnakeCase:
+                    text: toSnakeCase
+                    relativeUrl: docs/Methods/tosnakecase.html
+                toTitleCase:
+                    text: toTitleCase
+                    relativeUrl: docs/Methods/totitlecase.html
+                toSentenceCase:
+                    text: toSentenceCase
+                    relativeUrl: docs/Methods/tosentencecase.html
+                toSlugCase:
+                    text: toSlugCase
+                    relativeUrl: docs/Methods/toslugcase.html
+                isLowerCase:
+                    text: isLowerCase
+                    relativeUrl: docs/Methods/islowercase.html
+                isUpperCase:
+                    text: isUpperCase
+                    relativeUrl: docs/Methods/isuppercase.html
+                isAlpha:
+                    text: isAlpha
+                    relativeUrl: docs/Methods/isalpha.html
+                isAlphanumeric:
+                    text: isAlphanumeric
+                    relativeUrl: docs/Methods/isalphanumeric.html
+                isBlank:
+                    text: isBlank
+                    relativeUrl: docs/Methods/isblank.html
+                isHexadecimal:
+                    text: isHexadecimal
+                    relativeUrl: docs/Methods/ishexadecimal.html
+                isJson:
+                    text: isJson
+                    relativeUrl: docs/Methods/isjson.html
+                isSerialized:
+                    text: isSerialized
+                    relativeUrl: docs/Methods/isserialized.html
+                isBase64:
+                    text: isBase64
+                    relativeUrl: docs/Methods/isbase64.html
+                pad:
+                    text: pad
+                    relativeUrl: docs/Methods/pad.html
+                padLeft:
+                    text: padLeft
+                    relativeUrl: docs/Methods/padleft.html
+                padRight:
+                    text: padRight
+                    relativeUrl: docs/Methods/padright.html
+                padBoth:
+                    text: padBoth
+                    relativeUrl: docs/Methods/padboth.html
+                applyPadding:
+                    text: applyPadding
+                    relativeUrl: docs/Methods/applypadding.html
+                hasLowerCase:
+                    text: hasLowerCase
+                    relativeUrl: docs/Methods/haslowercase.html
+                hasUpperCase:
+                    text: hasUpperCase
+                    relativeUrl: docs/Methods/hasuppercase.html
+                normaliseLineEndings:
+                    text: normaliseLineEndings
+                    relativeUrl: docs/Methods/normaliselineendings.html
+                delimit:
+                    text: delimit
+                    relativeUrl: docs/Methods/delimit.html
+                insert:
+                    text: insert
+                    relativeUrl: docs/Methods/insert.html
+                lines:
+                    text: lines
+                    relativeUrl: docs/Methods/lines.html
+                repeat:
+                    text: repeat
+                    relativeUrl: docs/Methods/repeat.html
+                reverse:
+                    text: reverse
+                    relativeUrl: docs/Methods/reverse.html
+                shuffle:
+                    text: shuffle
+                    relativeUrl: docs/Methods/shuffle.html
+                slice:
+                    text: slice
+                    relativeUrl: docs/Methods/slice.html
+                surround:
+                    text: surround
+                    relativeUrl: docs/Methods/surround.html
+                tidy:
+                    text: tidy
+                    relativeUrl: docs/Methods/tidy.html
+                countSubstr:
+                    text: countSubstr
+                    relativeUrl: docs/Methods/countsubstr.html
+                htmlDecode:
+                    text: htmlDecode
+                    relativeUrl: docs/Methods/htmldecode.html
+                htmlEncode:
+                    text: htmlEncode
+                    relativeUrl: docs/Methods/htmlencode.html
+                htmlXssClean:
+                    text: htmlXssClean
+                    relativeUrl: docs/Methods/htmlxssclean.html
+                htmlStripTags:
+                    text: htmlStripTags
+                    relativeUrl: docs/Methods/htmlstriptags.html
+                setRegexDelimiter:
+                    text: setRegexDelimiter
+                    relativeUrl: docs/Methods/setregexdelimiter.html
+                regexMatch:
+                    text: regexMatch
+                    relativeUrl: docs/Methods/regexmatch.html
+                regexExtract:
+                    text: regexExtract
+                    relativeUrl: docs/Methods/regexextract.html
+                regexReplace:
+                    text: regexReplace
+                    relativeUrl: docs/Methods/regexreplace.html
+                split:
+                    text: split
+                    relativeUrl: docs/Methods/split.html
+                trim:
+                    text: trim
+                    relativeUrl: docs/Methods/trim.html
+                trimLeft:
+                    text: trimLeft
+                    relativeUrl: docs/Methods/trimleft.html
+                trimRight:
+                    text: trimRight
+                    relativeUrl: docs/Methods/trimright.html
+                getTrimChars:
+                    text: getTrimChars
+                    relativeUrl: docs/Methods/gettrimchars.html
+                removeLeft:
+                    text: removeLeft
+                    relativeUrl: docs/Methods/removeleft.html
+                removeRight:
+                    text: removeRight
+                    relativeUrl: docs/Methods/removeright.html
+                removeWhitespace:
+                    text: removeWhitespace
+                    relativeUrl: docs/Methods/removewhitespace.html
+                ensureLeft:
+                    text: ensureLeft
+                    relativeUrl: docs/Methods/ensureleft.html
+                ensureRight:
+                    text: ensureRight
+                    relativeUrl: docs/Methods/ensureright.html
                 between:
                     text: between
                     relativeUrl: docs/Methods/between.html
                 betweenAll:
                     text: betweenAll
                     relativeUrl: docs/Methods/betweenall.html
+                indexOf:
+                    text: indexOf
+                    relativeUrl: docs/Methods/indexof.html
+                indexOfLast:
+                    text: indexOfLast
+                    relativeUrl: docs/Methods/indexoflast.html
+                replace:
+                    text: replace
+                    relativeUrl: docs/Methods/replace.html
+                replaceExact:
+                    text: replaceExact
+                    relativeUrl: docs/Methods/replaceexact.html
+                replaceBeginning:
+                    text: replaceBeginning
+                    relativeUrl: docs/Methods/replacebeginning.html
+                replaceEnding:
+                    text: replaceEnding
+                    relativeUrl: docs/Methods/replaceending.html
+                truncate:
+                    text: truncate
+                    relativeUrl: docs/Methods/truncate.html
+                safeTruncate:
+                    text: safeTruncate
+                    relativeUrl: docs/Methods/safetruncate.html
+                contains:
+                    text: contains
+                    relativeUrl: docs/Methods/contains.html
+                containsAll:
+                    text: containsAll
+                    relativeUrl: docs/Methods/containsall.html
+                containsAny:
+                    text: containsAny
+                    relativeUrl: docs/Methods/containsany.html
+                first:
+                    text: first
+                    relativeUrl: docs/Methods/first.html
+                last:
+                    text: last
+                    relativeUrl: docs/Methods/last.html
+                startsWith:
+                    text: startsWith
+                    relativeUrl: docs/Methods/startswith.html
+                endsWith:
+                    text: endsWith
+                    relativeUrl: docs/Methods/endswith.html
+                longestCommonPrefix:
+                    text: longestCommonPrefix
+                    relativeUrl: docs/Methods/longestcommonprefix.html
+                longestCommonSuffix:
+                    text: longestCommonSuffix
+                    relativeUrl: docs/Methods/longestcommonsuffix.html
+                longestCommonSubstring:
+                    text: longestCommonSubstring
+                    relativeUrl: docs/Methods/longestcommonsubstring.html
+                lowerCaseFirst:
+                    text: lowerCaseFirst
+                    relativeUrl: docs/Methods/lowercasefirst.html
+                upperCaseFirst:
+                    text: upperCaseFirst
+                    relativeUrl: docs/Methods/uppercasefirst.html
+                swapCase:
+                    text: swapCase
+                    relativeUrl: docs/Methods/swapcase.html

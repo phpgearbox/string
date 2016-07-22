@@ -18,7 +18,7 @@ trait Html
     /**
      * Convert all HTML entities to their applicable characters.
      *
-     * @see http://php.net/manual/en/function.html-entity-decode.php
+     * @link http://php.net/manual/en/function.html-entity-decode.php
      *
      * @param  int|null $flags Optional flags
      *
@@ -40,7 +40,7 @@ trait Html
     /**
      * Convert all applicable characters to HTML entities.
      *
-     * @see http://php.net/manual/en/function.htmlentities.php
+     * @link http://php.net/manual/en/function.htmlentities.php
      *
      * @param  int|null $flags        Optional flags.
      *
@@ -71,8 +71,8 @@ trait Html
      *
      * This method does a fair amount of work and it is extremely thorough,
      * designed to prevent even the most obscure XSS attempts. Nothing is ever
-     * 100% foolproof, of course, but I haven't been able to get anything passed
-     * the filter.
+     * 100 percent foolproof, of course, but I haven't been able to get anything
+     * passed the filter.
      *
      * > NOTE: Should only be used to deal with data upon submission.
      * > It's not something that should be used for general runtime processing.
@@ -81,7 +81,7 @@ trait Html
      * to escape anything that you output!!!__
      *
      * This uses a packaged version of the Anti XSS Library from CodeIgniter.
-     * @see https://github.com/voku/anti-xss
+     * @link https://github.com/voku/anti-xss
      *
      * @return static
      */

@@ -19,7 +19,7 @@ trait Regx
     /**
      * The delimiter we will use for all regular expressions.
      *
-     * @see http://php.net/manual/en/regexp.reference.delimiters.php
+     * @link http://php.net/manual/en/regexp.reference.delimiters.php
      *
      * @var string
      */

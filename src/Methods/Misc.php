@@ -18,7 +18,7 @@ trait Misc
     /**
      * Normalise all line endings in string to `$newLineEnding`.
      *
-     * @see http://stackoverflow.com/questions/7836632
+     * @link http://stackoverflow.com/questions/7836632
      *
      * @param  string $newLineEnding Defaults to a LINE FEED. You may provide
      *                               any string to replace all line endings.

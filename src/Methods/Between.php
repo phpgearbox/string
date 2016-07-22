@@ -17,7 +17,7 @@ use Gears\String\Exceptions\PcreException;
 trait Between
 {
     /**
-     * Returns the substring between $start and $end.
+     * Returns the substring between `$start` and `$end`.
      *
      * An optional offset may be supplied from which
      * to begin the search for the start string.
