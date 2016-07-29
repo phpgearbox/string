@@ -1,3 +1,4 @@
+## Examples
 ```php
 $expected = [['<p>Hello</p>', '<p>World</p>'], ['Hello', 'World']];
 $str = new Str('<p>Hello</p><p>World</p>');

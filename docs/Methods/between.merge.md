@@ -1,3 +1,4 @@
+## Examples
 ```php
 $expected = 'Hello';
 $str = new Str('<p>Hello</p>');

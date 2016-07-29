@@ -46,11 +46,4 @@ _<?= $this->v('method.return.type') ?>_<?= '  ' ?>
 <?php endforeach; ?>
 <?php endif; ?>
 
-## Examples
-<?= $this->v('method.examples') ?>
-
-## Changelog
-```
-<?= $this->v('method.changelog') ?>
-
-```
+<?= $this->v('method.merge') ?>

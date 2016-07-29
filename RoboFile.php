@@ -18,11 +18,15 @@
 require_once(__DIR__.'/vendor/autoload.php');
 
 use Gears\String\Str;
+use YaLinqo\Enumerable as Linq;
 use Symfony\Component\Yaml\Yaml;
 use phpDocumentor\Reflection\DocBlockFactory;
 
 class RoboFile extends Robo\Tasks
 {
+    /**
+     * Runs unit tests, with code coverage report.
+     */
     public function test()
     {
         exit
@@ -34,86 +38,107 @@ class RoboFile extends Robo\Tasks
         );
     }
 
+    /**
+     * Generates the projects documentation.
+     *
+     * This is made up of reflected information, DocBlocks
+     * and other human written text.
+     */
     public function docGenerate()
     {
+        // This will be populated as we loop through all our methods.
+        // At the end of the process we will write this to the
+        // couscous.yml config file.
         $couscousMenuItems = [];
 
+        // We are using some code from phpDocumentor to parse the docblocks
+        // and keep the markdown documentation up to date with the code.
+        // https://github.com/phpDocumentor/ReflectionDocBlock
         $docBlockParser = DocBlockFactory::createInstance();
 
-        $rClass = new ReflectionClass('\\Gears\\String\\Str');
-        foreach ($rClass->getTraits() as $rTrait)
+        // To actually generate the method mardown documents we are using the
+        // [Foil](http://www.foilphp.it/) view engine. The template for all
+        // documents output in `./docs/Methods` is `./docs/_Views/method.php`
+        $view = Foil\engine
+        ([
+            'folders' => ['./docs/_Views'],
+            'autoescape' => false
+        ]);
+
+        // Loop over all methods contained in traits of the Str class.
+        Linq::from((new ReflectionClass('\\Gears\\String\\Str'))->getTraits())
+        ->selectMany(function($v){ return $v->getMethods(); })
+        ->each(function($rMethod) use (&$couscousMenuItems, $docBlockParser, $view)
         {
-            foreach ($rTrait->getMethods() as $rMethod)
+            // Parse the methods docblock
+            $docBlock = $docBlockParser->create($rMethod->getDocComment());
+
+            // Create an array of method parameters
+            $parameters = [];
+            $paramTags = Linq::from($docBlock->getTagsByName('param'));
+            foreach ($rMethod->getParameters() as $rParam)
             {
-                $docBlock = $docBlockParser->create($rMethod->getDocComment());
-
-                $parameters = [];
-                $paramTags = $docBlock->getTagsByName('param');
-                foreach ($rMethod->getParameters() as $rParam)
+                $paramTag = $paramTags->firstOrDefault(null, function($v) use ($rParam)
                 {
-                    $paramTag = null;
-                    foreach ($paramTags as $v)
-                    {
-                        if ($v->getVariableName() === $rParam->getName())
-                        {
-                            $paramTag = $v; break;
-                        }
-                    }
+                    return $v->getVariableName() == $rParam->getName();
+                });
 
-                    $parameters[] =
-                    [
-                        'name' => $rParam->getName(),
-                        'type' => $paramTag !== null ? (string)$paramTag->getType() : '',
-                        'default' => $rParam->isOptional() ? $rParam->getDefaultValue() : '',
-                        'description' => $paramTag !== null ? (string)$paramTag->getDescription() : ''
-                    ];
-                }
-
-                $returnTag = $docBlock->getTagsByName('return')[0];
-
-                $examples = '';
-                $examplesFile = './docs/Methods/'.$rMethod->getName().'.examples.md';
-                if (file_exists($examplesFile))
-                {
-                    $examples = file_get_contents($examplesFile);
-                }
-
-                exec('git log '.$rMethod->getFileName(), $changelog);
-                $changelog = implode("\n", $changelog);
-
-                $engine = Foil\engine(['folders' => ['./docs/views'], 'autoescape' => false]);
-                $docContents = $engine->render('method',
+                $parameters[] =
                 [
-                    'method' =>
-                    [
-                        'name' => $rMethod->getName(),
-                        'summary' => (string)$docBlock->getSummary(),
-                        'description' => (string)$docBlock->getDescription(),
-                        'parameters' => $parameters,
-                        'return' =>
-                        [
-                            'type' => $returnTag->getType(),
-                            'description' => $returnTag->getDescription()
-                        ],
-                        'examples' => $examples,
-                        'changelog' => $changelog
-                    ]
-                ]);
-
-                $docFile = './docs/Methods/'.$rMethod->getName().'.md';
-
-                file_put_contents($docFile, $docContents);
-
-                $couscousMenuItems[$rMethod->getName()] =
-                [
-                    'text' => $rMethod->getName(),
-                    'relativeUrl' => 'docs/Methods/'.Str::s($rMethod->getName())->toLowerCase().'.html'
+                    'name' => $rParam->getName(),
+                    'type' => $paramTag !== null ? (string)$paramTag->getType() : '',
+                    'default' => $rParam->isOptional() ? $rParam->getDefaultValue() : '',
+                    'description' => $paramTag !== null ? (string)$paramTag->getDescription() : ''
                 ];
             }
-        }
 
+            // Grab the return tag, if there is one.
+            $returnTag = Linq::from($docBlock->getTagsByName('return'))->firstOrDefault(null);
+
+            // This is where the human element comes into play.
+            // Each method may/should have an additional markdown document that
+            // gets merged into the generated document. This additional document
+            // should contain any examples, a changelog specfic to the method,
+            // and any other note worthy information, etc.
+            $mergeDoc = '';
+            $mergeDocFile = './docs/Methods/'.$rMethod->getName().'.merge.md';
+            if (file_exists($mergeDocFile))
+            {
+                $mergeDoc = file_get_contents($mergeDocFile);
+            }
+
+            // Finally render the method documentation.
+            file_put_contents('./docs/Methods/'.$rMethod->getName().'.md', $view->render('method',
+            [
+                'method' =>
+                [
+                    'name' => $rMethod->getName(),
+                    'summary' => (string)$docBlock->getSummary(),
+                    'description' => (string)$docBlock->getDescription(),
+                    'parameters' => $parameters,
+                    'return' =>
+                    [
+                        'type' => $returnTag !== null ? $returnTag->getType() : '',
+                        'description' => $returnTag !== null ? $returnTag->getDescription() : ''
+                    ],
+                    'merge' => $mergeDoc
+                ]
+            ]));
+
+            // Add the method to our couscous menu.
+            $couscousMenuItems[$rMethod->getName()] =
+            [
+                'text' => $rMethod->getName(),
+                'relativeUrl' => 'docs/Methods/'.Str::s($rMethod->getName())->toLowerCase().'.html'
+            ];
+        });
+
+        // Save the updated couscous menu.
         $couscous = Yaml::parse(file_get_contents('couscous.yml'));
         $couscous['menu']['sections']['methods']['items'] = $couscousMenuItems;
         file_put_contents('couscous.yml', Yaml::dump($couscous, 100));
+
+        // Start the couscous preview server
+        $this->_exec(__DIR__.'/vendor/bin/couscous preview');
     }
 }

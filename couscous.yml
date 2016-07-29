@@ -1,7 +1,7 @@
 title: 'phpGearBox - gears/string'
 subTitle: 'An object oriented way to work with strings in PHP, with multibyte support baked in.'
 template:
-    url: 'https://github.com/CouscousPHP/Template-Dark'
+    directory: docs/_Views/CousCous
 exclude:
     - src
     - tests
@@ -18,9 +18,6 @@ menu:
                 home:
                     text: README
                     relativeUrl: index.html
-                initialisation-options:
-                    text: 'Initialisation Options'
-                    relativeUrl: 'docs/initialisation options.html'
                 string-builder:
                     text: 'The String Builder'
                     relativeUrl: 'docs/string builder.html'
