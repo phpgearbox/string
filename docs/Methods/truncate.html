@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>phpGearBox - gears/string</title>
+
+        <link rel="stylesheet" href="http://phpgearbox.github.io/string/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://phpgearbox.github.io/string/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://phpgearbox.github.io/string/css/highlight.tomorrow-night.css">
+        <link rel="stylesheet" href="http://phpgearbox.github.io/string/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="http://phpgearbox.github.io/string/">
+                phpGearBox - gears/string
+                <small class="hidden-xs hidden-sm">
+                    An object oriented way to work with strings in PHP, with multibyte support baked in.
+                </small>
+            </a>
+
+                            <a href="https://github.com/phpgearbox/string">
+                    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+                </a>
+            
+        </header>
+
+        <main class="container-fluid">
+            <div class="row">
+
+                
+                    <nav id="sidebar" class="col-sm-3 col-lg-2" role="navigation">
+                        <div class="scrollable">
+                                                            <p class="text-muted">
+                                    Overview
+                                </p>
+
+                                <ul class="nav nav-pills nav-stacked">
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/index.html">
+                                                README
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/string builder.html">
+                                                The String Builder
+                                            </a>
+                                        </li>
+                                                                    </ul>
+                                                            <p class="text-muted">
+                                    Methods
+                                </p>
+
+                                <ul class="nav nav-pills nav-stacked">
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/tostring.html">
+                                                toString
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/toarray.html">
+                                                toArray
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/tolowercase.html">
+                                                toLowerCase
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/touppercase.html">
+                                                toUpperCase
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/tosingular.html">
+                                                toSingular
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/toplural.html">
+                                                toPlural
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/toascii.html">
+                                                toAscii
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/toboolean.html">
+                                                toBoolean
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/tospaces.html">
+                                                toSpaces
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/totabs.html">
+                                                toTabs
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/todashed.html">
+                                                toDashed
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/tounderscored.html">
+                                                toUnderScored
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/tocamelcase.html">
+                                                toCamelCase
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/tosnakecase.html">
+                                                toSnakeCase
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/totitlecase.html">
+                                                toTitleCase
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/tosentencecase.html">
+                                                toSentenceCase
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/toslugcase.html">
+                                                toSlugCase
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/islowercase.html">
+                                                isLowerCase
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/isuppercase.html">
+                                                isUpperCase
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/isalpha.html">
+                                                isAlpha
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/isalphanumeric.html">
+                                                isAlphanumeric
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/isblank.html">
+                                                isBlank
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/ishexadecimal.html">
+                                                isHexadecimal
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/isjson.html">
+                                                isJson
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/isserialized.html">
+                                                isSerialized
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/isbase64.html">
+                                                isBase64
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/pad.html">
+                                                pad
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/padleft.html">
+                                                padLeft
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/padright.html">
+                                                padRight
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/padboth.html">
+                                                padBoth
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/applypadding.html">
+                                                applyPadding
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/haslowercase.html">
+                                                hasLowerCase
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/hasuppercase.html">
+                                                hasUpperCase
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/normaliselineendings.html">
+                                                normaliseLineEndings
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/delimit.html">
+                                                delimit
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/insert.html">
+                                                insert
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/lines.html">
+                                                lines
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/repeat.html">
+                                                repeat
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/reverse.html">
+                                                reverse
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/shuffle.html">
+                                                shuffle
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/slice.html">
+                                                slice
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/surround.html">
+                                                surround
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/tidy.html">
+                                                tidy
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/countsubstr.html">
+                                                countSubstr
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/htmldecode.html">
+                                                htmlDecode
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/htmlencode.html">
+                                                htmlEncode
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/htmlxssclean.html">
+                                                htmlXssClean
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/htmlstriptags.html">
+                                                htmlStripTags
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/setregexdelimiter.html">
+                                                setRegexDelimiter
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/regexmatch.html">
+                                                regexMatch
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/regexextract.html">
+                                                regexExtract
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/regexreplace.html">
+                                                regexReplace
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/split.html">
+                                                split
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/trim.html">
+                                                trim
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/trimleft.html">
+                                                trimLeft
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/trimright.html">
+                                                trimRight
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/gettrimchars.html">
+                                                getTrimChars
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/removeleft.html">
+                                                removeLeft
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/removeright.html">
+                                                removeRight
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/removewhitespace.html">
+                                                removeWhitespace
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/ensureleft.html">
+                                                ensureLeft
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/ensureright.html">
+                                                ensureRight
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/between.html">
+                                                between
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/betweenall.html">
+                                                betweenAll
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/indexof.html">
+                                                indexOf
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/indexoflast.html">
+                                                indexOfLast
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/replace.html">
+                                                replace
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/replaceexact.html">
+                                                replaceExact
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/replacebeginning.html">
+                                                replaceBeginning
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/replaceending.html">
+                                                replaceEnding
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/truncate.html">
+                                                truncate
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/safetruncate.html">
+                                                safeTruncate
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/contains.html">
+                                                contains
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/containsall.html">
+                                                containsAll
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/containsany.html">
+                                                containsAny
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/first.html">
+                                                first
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/last.html">
+                                                last
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/startswith.html">
+                                                startsWith
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/endswith.html">
+                                                endsWith
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/longestcommonprefix.html">
+                                                longestCommonPrefix
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/longestcommonsuffix.html">
+                                                longestCommonSuffix
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/longestcommonsubstring.html">
+                                                longestCommonSubstring
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/lowercasefirst.html">
+                                                lowerCaseFirst
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/uppercasefirst.html">
+                                                upperCaseFirst
+                                            </a>
+                                        </li>
+                                                                            <li class="">
+                                            <a href="http://phpgearbox.github.io/string/docs/Methods/swapcase.html">
+                                                swapCase
+                                            </a>
+                                        </li>
+                                                                    </ul>
+                                                    </div>
+                    </nav>
+
+                
+                <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
+                    <h1 id="truncate">truncate</h1>
+<p>Truncates the string to a given length.</p>
+<h2 id="description">Description</h2>
+<p><code>static truncate(int $length, string $substring)</code></p>
+<p>If $substring is provided, and truncating occurs, the string is further
+truncated so that the substring may be appended without exceeding the
+desired length.</p>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li>
+<p><em>int</em> <strong>$length</strong><br />
+Desired length of the truncated string.</p>
+</li>
+<li><em>string</em> <strong>$substring</strong><br />
+The substring to append if it can fit.</li>
+</ul>
+<h3 id="return-value">Return Value</h3>
+<p><em>static</em><br />
+String after truncating.</p>
+                </section>
+
+            </div>
+        </main>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yandex.st/highlightjs/7.5/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+
+                // Make our sidebar scrollable
+                $('#sidebar .scrollable').css('height', $(window).height()-$('header').outerHeight(true));
+            });
+        </script>
+
+    </body>
+</html>
