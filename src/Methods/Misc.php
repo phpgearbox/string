@@ -113,7 +113,7 @@ trait Misc
     /**
      * Returns a reversed string. A multibyte version of strrev().
      *
-     * @return Stringy Object with a reversed $str
+     * @return static Object with a reversed $str
      */
     public function reverse()
     {
@@ -211,6 +211,11 @@ trait Misc
      */
     public function countSubstr($substring, $caseSensitive = true)
     {
+    	  if (!isset($this->scalarString[0]))
+    	  {
+    	  	return 0;
+	      }
+
         if ($caseSensitive)
         {
             return UTF8::substr_count

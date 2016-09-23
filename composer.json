@@ -14,7 +14,7 @@
     "require":
     {
         "php": "^5.4 || ^7.0",
-        "voku/portable-utf8": "^2.0",
+        "voku/portable-utf8": "^3.0",
         "icecave/parity": "^1.0"
     },
     "require-dev":
@@ -22,7 +22,7 @@
         "couscous/couscous": "^1.5",
         "codegyre/robo": "^0.7",
         "phpunit/phpunit": "^4.8",
-        "voku/anti-xss": "^1.2",
+        "voku/anti-xss": "^2.0",
         "voku/urlify": "^2.0",
         "icanboogie/inflector": "^1.4",
         "satooshi/php-coveralls": "^1.0"
