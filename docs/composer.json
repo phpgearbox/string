@@ -1,0 +1,19 @@
+{
+    "autoload-dev":
+    {
+        "psr-4":
+        {
+            "Gears\\String\\": "../src"
+        }
+    },
+    "require-dev":
+    {
+        "voku/portable-utf8": "^2.0",
+        "icecave/parity": "^1.0",
+        "icanboogie/inflector": "^1.4",
+        "foil/foil": "~0.6",
+        "symfony/yaml": "^3.1",
+        "athari/yalinqo": "^2.4",
+        "phpdocumentor/reflection-docblock": "^3.1"
+    }
+}
