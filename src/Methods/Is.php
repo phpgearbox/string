@@ -16,6 +16,27 @@ use voku\helper\UTF8;
 trait Is
 {
     /**
+     * Poor mans WildCard regular expression.
+     *
+     * Asterisks are translated into zero-or-more regular expression wildcards
+     * to make it convenient to check if the strings starts with the given
+     * pattern such as "library/*", making any string check convenient.
+     *
+     * @credit Originally from Laravel, thanks Taylor.
+     * 
+     * @param string $pattern The string or pattern to match against.
+     * 
+     * @return bool Whether or not we match the provided pattern.
+     */
+    public function is($pattern)
+    {
+        if ($this->toString() === $pattern) return true;
+        $quotedPattern = preg_quote($pattern, $this->regexDelimiter);
+        $replaceWildCards = str_replace('\*', '.*', $quotedPattern);
+        return $this->regexMatch('^'.$replaceWildCards.'\z');
+    }
+    
+    /**
      * Is the entire string lower case?
      *
      * @return bool Whether or not $str contains only lower case characters.

@@ -75,6 +75,9 @@ menu:
                 toSlugCase:
                     text: toSlugCase
                     relativeUrl: docs/Methods/toslugcase.html
+                is:
+                    text: is
+                    relativeUrl: docs/Methods/is.html
                 isLowerCase:
                     text: isLowerCase
                     relativeUrl: docs/Methods/islowercase.html

@@ -5,6 +5,29 @@ use Gears\String\Str;
 class IsTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * @dataProvider isProvider()
+     */
+    public function testIs($expected, $string, $pattern, $encoding = null)
+    {
+        $str = new Str($string, $encoding);
+        $result = $str->is($pattern);
+        $this->assertInternalType('boolean', $result);
+        $this->assertEquals($expected, $result);
+        $this->assertEquals($string, $str);
+    }
+
+    public function isProvider()
+    {
+        return array
+        (
+            [true, 'Gears\\String\\Str', 'Gears\\String\\Str'],
+            [true, 'Gears\\String\\Str', 'Gears\\*\\Str'],
+            [true, 'Gears\\String\\Str', 'Gears\\*\\*'],
+            [false, 'Gears\\String\\Str', 'Gears-*-*']
+        );
+    }
+    
+    /**
      * @dataProvider isLowerCaseProvider()
      */
     public function testIsLowerCase($expected, $string, $encoding = null)
