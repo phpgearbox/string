@@ -51,49 +51,6 @@ trait Replace
     }
 
     /**
-     * Replaces only if an exact match is found.
-     *
-     * Essentially all this does is swaps one string for another.
-     * I needed this in a db migration script to map a bunch of
-     * old column names to new column names.
-     *
-     * @param  string|string[] $search      Either a single search term or
-     *                                      an array of search terms.
-     *
-     * @param  string|string[] $replacement Must be the same length as $search.
-     *                                      So if you provide a single search
-     *                                      term, you must provide a single
-     *                                      replacement, if you provide 10
-     *                                      search terms you must provide 10
-     *                                      replacements.
-     *
-     * @return static
-     */
-    public function replaceExact($search, $replacement)
-    {
-        if (!is_array($search)) $search = [$search];
-        if (!is_array($replacement)) $replacement = [$replacement];
-
-        if (count($search) !== count($replacement))
-        {
-            throw new \InvalidArgumentException
-            (
-                '$search and $replacement must the same length!'
-            );
-        }
-
-        foreach ($search as $key => $term)
-        {
-            if ($this->scalarString == (string)$term)
-            {
-                return $this->newSelf($replacement[$key]);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * Replaces all occurrences of $search from the
      * beginning of string with $replacement.
      *

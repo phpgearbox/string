@@ -225,9 +225,6 @@ menu:
                 replace:
                     text: replace
                     relativeUrl: docs/Methods/replace.html
-                replaceExact:
-                    text: replaceExact
-                    relativeUrl: docs/Methods/replaceexact.html
                 replaceBeginning:
                     text: replaceBeginning
                     relativeUrl: docs/Methods/replacebeginning.html

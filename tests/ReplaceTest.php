@@ -52,30 +52,6 @@ class ReplaceTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider replaceExactProvider()
-     */
-    public function testReplaceExact($expected, $string, $search, $replacement)
-    {
-        $str = new Str($string);
-        $result = $str->replaceExact($search, $replacement);
-        $this->assertInstanceOf('Gears\\String\\Str', $result);
-        $this->assertEquals($expected, $result);
-        $this->assertEquals($string, $str);
-    }
-
-    public function replaceExactProvider()
-    {
-        return
-        [
-            ['foo bar', 'foobar', 'foobar', 'foo bar'],
-            ['foobar', 'foobar', 'bazbar', 'foo bar'],
-            ['foo bar', 'foobar', ['bar', 'bazbar', 'foobar'], ['bar bar', 'baz bar', 'foo bar']],
-            ['bar bar', 'bar', ['bar', 'bazbar', 'foobar'], ['bar bar', 'baz bar', 'foo bar']],
-            ['baz bar', 'bazbar', ['bar', 'bazbar', 'foobar'], ['bar bar', 'baz bar', 'foo bar']]
-        ];
-    }
-
-    /**
      * @dataProvider replaceBeginningProvider()
      */
     public function testReplaceBeginning($expected, $string, $search, $replacement, $encoding = null)
