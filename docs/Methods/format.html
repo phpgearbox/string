@@ -491,15 +491,20 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="isjson">isJson</h1>
-<p>Returns true if the string is JSON, false otherwise. Unlike json_decode
-in PHP 5.x, this method is consistent with PHP 7 and other JSON parsers,
-in that an empty string is not considered valid JSON.</p>
+                    <h1 id="format">format</h1>
+<p>Formats the current string, using the provided array of arguments.</p>
 <h2 id="description">Description</h2>
-<p><code>bool isJson()</code></p>
+<p><code>static format(array $args)</code></p>
+<p>For details on the syntax of the $format string:
+<a href="http://php.net/manual/en/function.sprintf.php">http://php.net/manual/en/function.sprintf.php</a></p>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><em>array</em> <strong>$args</strong><br />
+The arguments that will be inserted
+into the $format string.</li>
+</ul>
 <h3 id="return-value">Return Value</h3>
-<p><em>bool</em><br />
-Whether or not $str is JSON</p>
+<p><em>static</em></p>
                 </section>
 
             </div>
