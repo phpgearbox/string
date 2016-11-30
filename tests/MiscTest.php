@@ -336,4 +336,25 @@ class MiscTest extends PHPUnit_Framework_TestCase
             array(2, 'συγγραφέας', 'Σ', false, 'UTF-8')
         );
     }
+    
+    /**
+     * @dataProvider formatProvider()
+     */
+    public function testFormat($expected, $string, $args, $encoding = null)
+    {
+        $str = new Str($string, $encoding);
+        $result = $str->format($args);
+        $this->assertInstanceOf('Gears\\String\\Str', $result);
+        $this->assertEquals($expected, $result);
+        $this->assertEquals($string, $str);
+    }
+
+    public function formatProvider()
+    {
+        return array
+        (
+            array('hello world', 'hello %s', ['world']),
+            array('fòô bàř', 'fòô %s', ['bàř'], 'UTF-8')
+        );
+    }
 }

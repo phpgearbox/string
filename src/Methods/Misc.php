@@ -229,4 +229,20 @@ trait Misc
         $substring = UTF8::strtoupper($substring, $this->encoding);
         return UTF8::substr_count($str, $substring);
     }
+    
+    /**
+     * Formats the current string, using the provided array of arguments.
+     *
+     * For details on the syntax of the $format string:
+     * http://php.net/manual/en/function.sprintf.php
+     *
+     * @param  array      $args   The arguments that will be inserted
+     *                            into the $format string.
+     *
+     * @return static
+     */
+    public function format($args)
+    {
+        return $this->newSelf(vsprintf($this->scalarString, $args));
+    }
 }

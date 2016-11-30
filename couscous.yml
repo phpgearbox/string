@@ -159,6 +159,9 @@ menu:
                 countSubstr:
                     text: countSubstr
                     relativeUrl: docs/Methods/countsubstr.html
+                format:
+                    text: format
+                    relativeUrl: docs/Methods/format.html
                 htmlDecode:
                     text: htmlDecode
                     relativeUrl: docs/Methods/htmldecode.html

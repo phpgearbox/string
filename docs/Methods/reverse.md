@@ -2,9 +2,9 @@
 Returns a reversed string. A multibyte version of strrev().
 
 ## Description
-`\Stringy reverse()`
+`static reverse()`
 
 
 ### Return Value
-_\Stringy_  
+_static_  
 Object with a reversed $str
